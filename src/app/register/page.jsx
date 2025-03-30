@@ -46,7 +46,7 @@ export default function Register() {
     const createUser = async () => {
         try {
             const res = await axios
-                .post('https://bkd-esfrar-expresjs-production.up.railway.app/api/register', {
+                .post('hhttps://backend-production-4fea.up.railway.app/api/register', {
                     first_name: inputValue.first_name,
                     last_name: inputValue.last_name,
                     username: inputValue.username,

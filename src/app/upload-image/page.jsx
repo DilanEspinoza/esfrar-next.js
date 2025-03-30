@@ -95,7 +95,7 @@ export default function UploadImage() {
 
 
         try {
-            const res = await axios.post('https://bkd-esfrar-expresjs-production.up.railway.app/api/upload', formData, {
+            const res = await axios.post('https://backend-production-4fea.up.railway.app/api/upload', formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             console.log(res.data);
