@@ -6,7 +6,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useUserContext } from "@/context/UserContext";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function UploadImage() {
     const { userId } = useUserContext();
@@ -96,7 +95,7 @@ export default function UploadImage() {
 
 
         try {
-            const res = await axios.post(`${API_URL}/api/upload`, formData, {
+            const res = await axios.post('https://bkd-esfrar-expresjs-production.up.railway.app/api/upload', formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             console.log(res.data);

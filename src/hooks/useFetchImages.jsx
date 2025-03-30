@@ -4,8 +4,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 export const useFetchImages = () => {
     const [data, setData] = useState()
     const [error, setError] = useState(null)
@@ -15,7 +13,7 @@ export const useFetchImages = () => {
         const getAllImages = async () => {
 
             try {
-                const res = await axios.get(`${API_URL}/api/images`)
+                const res = await axios.get('https://bkd-esfrar-expresjs-production.up.railway.app/api/images')
                 console.log(res)
                 setData(res.data)
 

@@ -8,7 +8,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUserContext } from "@/context/UserContext";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Login() {
 
@@ -46,7 +45,7 @@ export default function Login() {
     try {
 
       const res = await axios
-        .post(`${API_URL}/api/login`, {
+        .post('https://bkd-esfrar-expresjs-production.up.railway.app/api/login', {
           email: inputValue.email,
           password: inputValue.password,
         })
