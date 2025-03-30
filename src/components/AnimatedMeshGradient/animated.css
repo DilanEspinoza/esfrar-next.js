@@ -1,0 +1,63 @@
+@keyframes gradientBackground {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+/* @keyframes moveCircle1 {
+	0% {
+		transform: translate(0, 0);
+	}
+	50% {
+		transform: translate(100px, 100px);
+	}
+	100% {
+		transform: translate(0, 0);
+	}
+} */
+/* 
+@keyframes moveCircle2 {
+	0% {
+		transform: translate(0, 0);
+	}
+	50% {
+		transform: translate(-100px, -100px);
+	}
+	100% {
+		transform: translate(0, 0);
+	}
+} */
+/* 
+@keyframes moveCircle3 {
+	0% {
+		transform: translate(0, 0);
+	}
+	50% {
+		transform: translate(150px, -150px);
+	}
+	100% {
+		transform: translate(0, 0);
+	}
+} */
+
+.animate-gradientBackground {
+	animation: gradientBackground 8s ease infinite;
+}
+
+.animate-circle1 {
+	animation: moveCircle1 6s ease infinite;
+}
+
+.animate-circle2 {
+	animation: moveCircle2 6s ease infinite;
+}
+
+.animate-circle3 {
+	animation: moveCircle3 6s ease infinite;
+}

@@ -1,7 +1,4 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-
-import { UserProvider } from "@/context/UserContext";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -14,19 +11,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-	title: "Esfrar",
-	description: "Una galeria de imagenes",
+	title: "Login | Register",
+	description: "Register of esfrar",
 };
 
 export default function RootLayout({ children }) {
 	return (
-		<UserProvider>
-			<html lang='es'>
-				<body
-					className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-					{children}
-				</body>
-			</html>
-		</UserProvider>
+		<html lang='es'>
+			<body>{children}</body>
+		</html>
 	);
 }
