@@ -7,6 +7,7 @@ import { toast } from "nextjs-toast-notify";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUserContext } from "@/context/UserContext";
+import { headers } from "next/headers";
 
 
 export default function Login() {
@@ -48,6 +49,10 @@ export default function Login() {
         .post('https://bkd-esfrar-expresjs-production.up.railway.app/api/login', {
           email: inputValue.email,
           password: inputValue.password,
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+          }
         })
 
       console.log(res)

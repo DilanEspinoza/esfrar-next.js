@@ -13,7 +13,11 @@ export const useFetchImages = () => {
         const getAllImages = async () => {
 
             try {
-                const res = await axios.get('https://bkd-esfrar-expresjs-production.up.railway.app/api/images')
+                const res = await axios.get('https://bkd-esfrar-expresjs-production.up.railway.app/api/images', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
                 console.log(res)
                 setData(res.data)
 

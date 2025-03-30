@@ -52,7 +52,12 @@ export default function Register() {
                     username: inputValue.username,
                     email: inputValue.email,
                     password: inputValue.password,
-                })
+                },
+                    {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        }
+                    })
 
             toast.success(`${res.data.result}`, {
                 duration: 4000,
