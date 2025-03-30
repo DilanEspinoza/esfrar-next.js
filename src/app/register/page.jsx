@@ -6,6 +6,8 @@ import { toast } from "nextjs-toast-notify";
 import { Header } from "@/components/Header/Header";
 import { useRouter } from "next/navigation";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function Register() {
     const router = useRouter();
 
@@ -45,7 +47,7 @@ export default function Register() {
     const createUser = async () => {
         try {
             const res = await axios
-                .post(`${process.env.URL_BACKEND}/api/register`, {
+                .post(`${API_URL}/api/register`, {
                     first_name: inputValue.first_name,
                     last_name: inputValue.last_name,
                     username: inputValue.username,

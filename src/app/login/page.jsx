@@ -8,7 +8,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUserContext } from "@/context/UserContext";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export default function Login() {
+
+
   const { updateUserId } = useUserContext(); // Destructuramos el hook del contexto
 
   const router = useRouter();
@@ -42,7 +46,7 @@ export default function Login() {
     try {
 
       const res = await axios
-        .post(`${process.env.URL_BACKEND}/api/login`, {
+        .post(`${API_URL}/api/login`, {
           email: inputValue.email,
           password: inputValue.password,
         })
