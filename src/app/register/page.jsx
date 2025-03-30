@@ -45,7 +45,7 @@ export default function Register() {
     const createUser = async () => {
         try {
             const res = await axios
-                .post("http://localhost:3500/api/register", {
+                .post(`${process.env.URL_BACKEND}/api/register`, {
                     first_name: inputValue.first_name,
                     last_name: inputValue.last_name,
                     username: inputValue.username,

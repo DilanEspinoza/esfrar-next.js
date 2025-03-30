@@ -95,7 +95,7 @@ export default function UploadImage() {
 
 
         try {
-            const res = await axios.post("http://localhost:3500/api/upload", formData, {
+            const res = await axios.post(`${process.env.URL_BACKEND}/api/upload`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             console.log(res.data);

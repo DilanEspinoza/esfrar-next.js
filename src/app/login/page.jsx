@@ -42,7 +42,7 @@ export default function Login() {
     try {
 
       const res = await axios
-        .post("http://localhost:3500/api/login", {
+        .post(`${process.env.URL_BACKEND}/api/login`, {
           email: inputValue.email,
           password: inputValue.password,
         })

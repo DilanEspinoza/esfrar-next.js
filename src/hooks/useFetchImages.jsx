@@ -12,7 +12,7 @@ export const useFetchImages = () => {
         const getAllImages = async () => {
 
             try {
-                const res = await axios.get("http://localhost:3500/api/images")
+                const res = await axios.get(`${process.env.URL_BACKEND}/api/images`)
                 console.log(res)
                 setData(res.data)
 
