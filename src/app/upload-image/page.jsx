@@ -6,6 +6,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useUserContext } from "@/context/UserContext";
 
+import { toast } from "nextjs-toast-notify";
+
 
 export default function UploadImage() {
     const { userId } = useUserContext();
@@ -95,12 +97,28 @@ export default function UploadImage() {
 
 
         try {
-            const res = await axios.post('https://backend-production-4fea.up.railway.app/api/upload', formData, {
+            const res = await axios.post(process.env.NEXT_PUBLIC_API_URL + '/api/upload', formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });
             console.log(res.data);
-        } catch (error) {
-            console.error("Error al subir la imagen:", error);
+            toast.success(`${res.data.message}`, {
+                duration: 4000,
+                progress: true,
+                position: "bottom-right",
+                transition: "swingInverted",
+                icon: '',
+                sound: false,
+            });
+        } catch (err) {
+            toast.error(`${err}`, {
+                duration: 4000,
+                progress: true,
+                position: "bottom-right",
+                transition: "swingInverted",
+                icon: '',
+                sound: false,
+            });
+            console.error("Error al subir la imagen:", err);
         }
 
     };

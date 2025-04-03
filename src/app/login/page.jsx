@@ -45,7 +45,7 @@ export default function Login() {
     try {
 
       const res = await axios
-        .post('hhttps://backend-production-4fea.up.railway.app/api/login', {
+        .post(process.env.NEXT_PUBLIC_API_URL + '/api/login', {
           email: inputValue.email,
           password: inputValue.password,
         }, {
@@ -54,8 +54,11 @@ export default function Login() {
           }
         })
 
+      console.log("response logins")
       console.log(res)
       updateUserId(res.data.userId);
+      console.log(res.data.userId)
+
 
       if (res.status === 200) {
         localStorage.setItem("token", res.data.token)

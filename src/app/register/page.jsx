@@ -46,7 +46,7 @@ export default function Register() {
     const createUser = async () => {
         try {
             const res = await axios
-                .post('hhttps://backend-production-4fea.up.railway.app/api/register', {
+                .post(process.env.NEXT_PUBLIC_API_URL + '/api/register', {
                     first_name: inputValue.first_name,
                     last_name: inputValue.last_name,
                     username: inputValue.username,

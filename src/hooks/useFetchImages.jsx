@@ -13,7 +13,7 @@ export const useFetchImages = () => {
         const getAllImages = async () => {
 
             try {
-                const res = await axios.get('https://backend-production-4fea.up.railway.app/api/images', {
+                const res = await axios.get(process.env.NEXT_PUBLIC_API_URL + '/api/images', {
                     headers: {
                         'Content-Type': 'application/json',
                     }
