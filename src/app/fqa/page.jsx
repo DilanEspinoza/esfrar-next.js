@@ -8,7 +8,7 @@ const data = [
     {
         id: 1,
         question: "¿Qué es Esfrar?",
-        answer: "Esfrar es una plataforma digital que te permite buscar y descargar imágenes de alta calidad de forma gratuita.",
+        answer: "Esfrar es una plataforma digital que te permite subir, buscar y poder descargar imágenes de forma totalmente gratuita.",
     },
     {
         id: 2,
@@ -34,7 +34,7 @@ export default function FQA() {
             <Header />
             <div className="m-30 flex flex-col gap-20 ">
 
-                <h2 className="text-center text-5xl font-bold">Frequently Asked Questions</h2>
+                <h2 className="text-center text-5xl font-bold">Preguntas frecuentes</h2>
                 <main className="w-auto mx-10 lg:w-[80%] lg:mx-auto flex flex-col lg:items-center gap-10  ">
                     {data.map((e) => (
                         <SingleQuestion key={e.id} question={e.question}

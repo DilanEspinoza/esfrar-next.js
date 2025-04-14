@@ -1,18 +1,6 @@
-import { Geist, Geist_Mono } from "next/font/google";
-
-const geistSans = Geist({
-	variable: "--font-geist-sans",
-	subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
-});
-
 export const metadata = {
-	title: "Login | Register",
-	description: "Register of esfrar",
+	title: "Registrarse | Esfrar",
+	description: "Crear una nueva cuenta en Esfrar",
 };
 
 export default function RootLayout({ children }) {

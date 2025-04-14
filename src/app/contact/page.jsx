@@ -6,6 +6,9 @@ export default function Contact() {
         <>
             <Header />
             <main className="flex flex-col mt-20  items-start mx-40 gap-20">
+                <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0,transparent_1px)] bg-[size:6rem_4rem]">
+                    <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_800px_at_100%_200px,#86efac,transparent)]"></div>
+                </div>
                 <div>
                     <h1 className="text-4xl font-bold">Our offices</h1>
                     We have offices in multiple cities around the world to serve our clients better. You can reach us at any of the following locations.

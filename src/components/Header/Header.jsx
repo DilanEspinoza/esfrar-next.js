@@ -1,28 +1,54 @@
 "use client";
 
-import { useState } from "react";
-// import { useContext, useState } from "react";
-// import { SearchImgsContext } from "../../App";
+import {/*  useContext, */ useEffect, useState } from "react";
 import { SearchIcon } from "../icons/SearchIcon";
-// import { ArrowDownIcon } from "../icons/ArrowDownIcon";
-// import { UserIcon } from "../icons/UserIcon";
-// import { ArrowUpIcon } from "../icons/ArrowUpIcon";
 import Link from "next/link";
 import { BarsIcon } from "../icons/BarsIcon";
-// import { Link, useNavigate } from "react-router";
-
 import Image from "next/image";
 import { useLogin } from "@/hooks/useLogin";
+import { useRouter } from "next/navigation";
 
 
 export const Header = () => {
-    // const [isBtnUserActive, setIsBtnUserActive] = useState(false);
-    // const handleBtnUser = () => setIsBtnUserActive(!isBtnUserActive);
-    const { isLogin } = useLogin()
 
 
+
+
+
+
+    const [user, setUser] = useState(null);
     const [clickBtnBars, setClickBtnBars] = useState(false)
     const [clickUserAvatar, setClickUserAvatar] = useState(false)
+    const [inputValuSearch, setInputValueSearch] = useState("")
+    const { isLogin } = useLogin()
+
+    const router = useRouter()
+
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const json = localStorage.getItem("user");
+            const userParsed = JSON.parse(json);
+            setUser(userParsed);
+        }
+    }, []);
+
+    const username = user?.first_name
+    const userId = user?.id
+
+
+
+    const handleChangeInputForm = ({ target }) => setInputValueSearch(target.value)
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        router.push(`/images?search=${encodeURIComponent(inputValuSearch)}`)
+    };
+
+
+
+
 
     const handleBtnBars = () => {
         setClickBtnBars(!clickBtnBars)
@@ -34,41 +60,13 @@ export const Header = () => {
 
     }
     const handleClickBtnLogout = () => {
-        console.log("inicio de seccion cerrada")
         localStorage.removeItem("token")
-        window.location.reload();
+        localStorage.removeItem("user")
+        // window.location.reload();
+        router.push("/")
     }
 
-    // const context = useContext(SearchImgsContext);
-    // if (!context) {
-    //     throw new Error("Header must be used within a SearchImgsContext.Provider");
-    // }
-    // const { setSearchImgs } = context;
 
-    // const navigate = useNavigate();
-
-    // const [valueInputSearch, setValueInputSearch] = useState("");
-
-    const [buttonForm, setButtonForm] = useState(true);
-
-    // const handleOnChange = (event) => {
-    //     setValueInputSearch(event.target.value);
-    // };
-
-    // const handleOnClickOption = (event) => {
-    //     setSearchImgs(event.target.textContent)
-    //     console.log(event.target.textContent)
-    // }
-
-    const handleButtonFrom = () => {
-        setButtonForm(!buttonForm);
-    };
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     setSearchImgs(valueInputSearch);
-    //     navigate(`/images/search/${valueInputSearch}`);
-    // };
 
     return (
         <>
@@ -79,7 +77,7 @@ export const Header = () => {
                     </a>
                     <form
                         className='hidden md:block flex-1 items-center justify-between gap-2 rounded-xl  bg-gray-200'
-                    // onSubmit={handleSubmit}
+                        onSubmit={handleSubmit}
                     >
                         <div className=' mx-3 flex gap-1 w-4/5'>
                             <button type='submit'>
@@ -87,9 +85,9 @@ export const Header = () => {
                             </button>
                             <input
                                 type='text'
-                                placeholder='Search free photos'
+                                placeholder='Busca imagenes gratis'
                                 className='w-full outline-none border-none bg-gray-200 p-1.5'
-                            // onChange={handleOnChange}
+                                onChange={handleChangeInputForm}
                             />
                         </div>
 
@@ -107,12 +105,12 @@ export const Header = () => {
                         {!isLogin ? <div>
                             <Link href={`login`}>
                                 <button className='py-2 px-5 rounded-2xl cursor-pointer lg:hover:bg-neutral-100 '>
-                                    LogIn
+                                    Iniciar Seción
                                 </button>
                             </Link>
                             <Link href={`register`}>
                                 <button className='py-1.5 px-5 rounded-2xl cursor-pointer lg:hover:bg-neutral-100'>
-                                    Register
+                                    Registrarse
                                 </button>
                             </Link>
                         </div> :
@@ -122,7 +120,7 @@ export const Header = () => {
                                     onClick={handleUserMenu}
                                     className="bg-neutral-900 flex justify-center items-center rounded-full cursor-pointer">
                                     <Image
-                                        src={"https://robohash.org/user"}
+                                        src={`https://robohash.org/${username}`}
                                         alt="User Avatar"
                                         width={50}
                                         height={50}
@@ -130,24 +128,23 @@ export const Header = () => {
                                     />
                                 </div>
 
-                                {clickUserAvatar ? <div className="absolute z-50 flex flex-col gap-5 top-15 right-3 w-52 bg-neutral-800 p-5 text-start ¿ rounded-lg text-white ">
-                                    <p className="font-bold">Pepelian</p>
+                                {clickUserAvatar ? <div className="absolute z-50 flex flex-col gap-2 top-15 right-3 w-52 bg-neutral-800 p-5 text-start ¿ rounded-lg text-white ">
+                                    <p className="font-bold text-white truncate">{username}</p>
 
-
-
-                                    <div className="hover:bg-neutral-100 w-full p-2 rounded-lg hover:text-black hover:cursor-pointer">
-
-                                        <Link href="">My Profile</Link>
-                                    </div>
-                                    <div className="hover:bg-neutral-100 w-full p-2 rounded-lg hover:text-black hover:cursor-pointer">
-
-                                        <Link href="">Settings</Link>
-                                    </div>
                                     <hr />
+
+                                    <div className="hover:bg-neutral-100 w-full p-2 rounded-lg hover:text-black hover:cursor-pointer">
+
+                                        <Link href={`/users/${userId}`}>Mi Perfil</Link>
+                                    </div>
+                                    {/*   <div className="hover:bg-neutral-100 w-full p-2 rounded-lg hover:text-black hover:cursor-pointer">
+
+                                        <Link href="">Configuración</Link>
+                                    </div> */}
 
                                     <div onClick={handleClickBtnLogout} className="hover:bg-neutral-100 w-full p-2 rounded-lg hover:text-black hover:cursor-pointer">
 
-                                        <p >Logout</p>
+                                        <p >Cerrar Seción</p>
                                     </div>
                                 </div> : ""}
                             </div>}
@@ -157,9 +154,9 @@ export const Header = () => {
 
                         {/*      */}
 
-                        <Link href="upload-image">
+                        <Link href="/upload-image">
                             <button className='py-1.5 px-5  lg:outline-1 lg:outline-black rounded-2xl lg:hover:bg-blue-600 lg:hover:outline-none lg:hover:text-white'>
-                                Upload
+                                Subir
                             </button>
                         </Link>
                     </div>

@@ -95,7 +95,7 @@ export default function Register() {
             <div className='min-h-full flex flex-col items-center h-screen justify-center py-12 sm:px-6 lg:px-8'>
                 <div className='sm:mx-auto sm:w-full sm:max-w-md flex flex-col gap-3'>
                     <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>
-                        Create a new account
+                        Crear una nueva cuenta
                     </h2>
                     <div className='w-full border-t border-gray-300' />
                 </div>
@@ -110,7 +110,7 @@ export default function Register() {
                                 <label
                                     htmlFor='first_name'
                                     className='block text-sm font-medium text-gray-700'>
-                                    First name
+                                    Nombre
                                 </label>
                                 <div className='mt-1'>
                                     <input
@@ -128,7 +128,7 @@ export default function Register() {
                                 <label
                                     htmlFor='last_name'
                                     className='block text-sm font-medium text-gray-700'>
-                                    Last name
+                                    Apellido
                                 </label>
                                 <div className='mt-1'>
                                     <input
@@ -146,7 +146,7 @@ export default function Register() {
                                 <label
                                     htmlFor='username'
                                     className='block text-sm font-medium text-gray-700'>
-                                    Username
+                                    nombr de usuario
                                 </label>
                                 <div className='mt-1'>
                                     <input
@@ -164,7 +164,7 @@ export default function Register() {
                                 <label
                                     htmlFor='email'
                                     className='block text-sm font-medium text-gray-700'>
-                                    Email address
+                                    Correo electronico
                                 </label>
                                 <div className='mt-1'>
                                     <input
@@ -182,7 +182,7 @@ export default function Register() {
                                 <label
                                     htmlFor='password'
                                     className='block text-sm font-medium text-gray-700'>
-                                    Password
+                                    Contraseña
                                 </label>
                                 <div className='mt-1 relative'>
                                     <input
@@ -199,12 +199,12 @@ export default function Register() {
                                         type='button'
                                         onClick={togglePasswordVisibility}
                                         className='absolute inset-y-0 right-0 flex items-center px-2 text-sm text-gray-500'>
-                                        {showPassword ? "Hide" : "Show"}
+                                        {showPassword ? "Ocultar" : "Mostrar"}
                                     </button>
                                 </div>
                             </div>
 
-                            <div className='flex items-center justify-between'>
+                            {/*         <div className='flex items-center justify-between'>
                                 <div className='flex items-center'>
                                     <input
                                         id='remember-me'
@@ -215,7 +215,7 @@ export default function Register() {
                                     <label
                                         htmlFor='remember-me'
                                         className='ml-2 block text-sm text-gray-900'>
-                                        Remember me
+                                        Recordarme
                                     </label>
                                 </div>
 
@@ -226,13 +226,13 @@ export default function Register() {
                                         Forgot your password?
                                     </a>
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div>
                                 <button
                                     type='submit'
                                     className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer'>
-                                    Create
+                                    Crear
                                 </button>
                             </div>
                         </form>

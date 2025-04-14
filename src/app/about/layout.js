@@ -11,7 +11,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-	title: "Esfrar | About us",
+	title: "About us | Esfrar",
 	description: "Seccion de acerca de esfrar",
 };
 

@@ -13,12 +13,12 @@ export const useFetchImages = () => {
         const getAllImages = async () => {
 
             try {
-                const res = await axios.get(process.env.NEXT_PUBLIC_API_URL + '/api/images', {
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/images`, {
                     headers: {
                         'Content-Type': 'application/json',
                     }
                 })
-                console.log(res)
+                console.log(res.data)
                 setData(res.data)
 
             } catch (error) {

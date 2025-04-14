@@ -10,7 +10,17 @@ import { toast } from "nextjs-toast-notify";
 
 
 export default function UploadImage() {
-    const { userId } = useUserContext();
+    const [user, setUser] = useState(null)
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const json = localStorage.getItem("user");
+            const userParsed = JSON.parse(json);
+            setUser(userParsed);
+        }
+    }, []);
+
+    const userId = user?.id
 
     const router = useRouter();
     const [token, setToken] = useState(null);
@@ -31,6 +41,7 @@ export default function UploadImage() {
 
         location: ""
     })
+
 
     const handleOnChangeInput = (e) => {
         setInputValue({
@@ -82,6 +93,13 @@ export default function UploadImage() {
 
     const handleOnSubmit = (event) => {
         event.preventDefault()
+        setImage(null)
+        setInputValue({
+            title: "",
+            location: ""
+        })
+
+        setTags([])
 
         uploadImage()
     }
@@ -157,19 +175,20 @@ export default function UploadImage() {
 
                         <div className="flex flex-col gap-6 w-[50%] ">
                             <div className="flex flex-col gap-1">
-                                <label htmlFor="title" className="font-bold">Title</label>
+                                <label htmlFor="title" className="font-bold">Titulo</label>
                                 <input
                                     className="outline-none p-1.5 rounded-md border border-neutral-400"
                                     type="text"
                                     placeholder="Enter title"
                                     id="title"
                                     onChange={handleOnChangeInput}
+                                    value={inputValue.title}
                                     name="title"
                                 />
                             </div>
 
                             <div className="flex flex-col gap-3">
-                                <label htmlFor="tags" className="font-bold">Tags</label>
+                                <label htmlFor="tags" className="font-bold">Etiqutas</label>
                                 <input
                                     value={tag.title}
                                     onChange={handleChangeInputTags}
@@ -182,7 +201,7 @@ export default function UploadImage() {
                                     <div className="flex gap-3 items-center">
 
                                         {tags.length <= 3 ? tags.map((e, index) => (
-                                            <div key={index} className="bg-neutral-200 w-20 rounded-md text-black text-center">
+                                            <div key={index} className="bg-neutral-200 w-auto p-1 rounded-md text-black text-center">
                                                 {e}
                                             </div>
                                         )) : ""
@@ -193,25 +212,26 @@ export default function UploadImage() {
                                         className="text-blue-700 cursor-pointer"
                                         onClick={handleOnClick}
                                     >
-                                        Add
+                                        Agregar
                                     </button>
                                 </div>
                             </div>
 
                             <div className="flex flex-col gap-1">
-                                <label htmlFor="location" className="font-bold ">Location</label>
+                                <label htmlFor="location" className="font-bold ">Ubicación</label>
                                 <input
                                     className="outline-none p-1.5 rounded-md border border-neutral-400"
                                     type="text"
                                     placeholder="Enter location"
                                     id="location"
                                     name="location"
+                                    value={inputValue.location}
                                     onChange={handleOnChangeInput}
                                 />
                             </div>
                             <div className="flex justify-center">
 
-                                <button type="submit" className=" w-[50%] text-white bg-green-700 p-2 rounded-3xl cursor-pointer">
+                                <button type="submit" className=" w-[50%] text-white bg-blue-600 p-2 rounded-3xl cursor-pointer">
                                     Subir Imagen
                                 </button>
                             </div>

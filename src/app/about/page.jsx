@@ -8,16 +8,102 @@ export default function About() {
         <>
             <Header />
             {/* <AnimatedMeshGradient /> */}
-            <main className=" flex flex-col mt-20  items-center lg:items-start lg:mx-40 gap-20">
-                <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0,transparent_1px)] bg-[size:6rem_4rem]">
-                    <div className="absolute bottom-0 left-0 right-0 top-0 bg-[radial-gradient(circle_800px_at_100%_200px,#86efac,transparent)]"></div>
-                </div>
 
-                <section className="w-[50%] h-[80vh]  flex flex-col gap-4 p-2 mt-10">
-                    <h1 className="font-bold text-5xl tracking-wide leading-relaxed">La galería gratuita definitiva</h1>
-                    <p className="font-medium text-lg tracking-normal leading-loose text-neutral-600"> Esta galería ha sido creada para brindar a diseñadores, desarrolladores y todo tipo de personas brindando acceso a una colección gratuita de imágenes que pueden utilizar sin restricciones. </p>
-                    {/*   <div class="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]"></div> */}
-                </section>
+            <main className=" max-w-7xl mx-auto flex flex-col mt-20  items-center lg:items-start  gap-20">
+
+
+
+
+                <div className="relative w-full bg-white overflow-hidden">
+                    <div className="pt-16 pb-80 sm:pt-24 sm:pb-40 lg:pt-40 lg:pb-48">
+                        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 sm:static">
+                            <div className="sm:max-w-lg">
+                                <h1 className="text-4xl font font-extrabold tracking-tight text-gray-900 sm:text-6xl">
+                                    La galería gratuita definitiva
+                                </h1>
+                                <p className="mt-4 text-xl text-gray-500">
+                                    Esta galería ha sido creada para diseñadores, desarrolladores y para todo tipo de personas brindandoles acceso a una colección gratuita de imágenes que podran ser utilizadas sin restricción alguna.
+                                </p>
+                            </div>
+                            <div>
+                                <div className="mt-10">
+                                    {/* Decorative image grid */}
+                                    <div
+                                        aria-hidden="true"
+                                        className="pointer-events-none lg:absolute lg:inset-y-0 lg:max-w-7xl lg:mx-auto lg:w-full"
+                                    >
+                                        <div className="absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8">
+                                            <div className="flex items-center space-x-6 lg:space-x-8">
+                                                <div className="flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8">
+                                                    <div className="w-44 h-64 rounded-lg overflow-hidden sm:opacity-0 lg:opacity-100">
+                                                        <img
+                                                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
+                                                            alt=""
+                                                            className="w-full h-full object-center object-cover"
+                                                        />
+                                                    </div>
+                                                    <div className="w-44 h-64 rounded-lg overflow-hidden">
+                                                        <img
+                                                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-02.jpg"
+                                                            alt=""
+                                                            className="w-full h-full object-center object-cover"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8">
+                                                    <div className="w-44 h-64 rounded-lg overflow-hidden">
+                                                        <img
+                                                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-03.jpg"
+                                                            alt=""
+                                                            className="w-full h-full object-center object-cover"
+                                                        />
+                                                    </div>
+                                                    <div className="w-44 h-64 rounded-lg overflow-hidden">
+                                                        <img
+                                                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-04.jpg"
+                                                            alt=""
+                                                            className="w-full h-full object-center object-cover"
+                                                        />
+                                                    </div>
+                                                    <div className="w-44 h-64 rounded-lg overflow-hidden">
+                                                        <img
+                                                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-05.jpg"
+                                                            alt=""
+                                                            className="w-full h-full object-center object-cover"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8">
+                                                    <div className="w-44 h-64 rounded-lg overflow-hidden">
+                                                        <img
+                                                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-06.jpg"
+                                                            alt=""
+                                                            className="w-full h-full object-center object-cover"
+                                                        />
+                                                    </div>
+                                                    <div className="w-44 h-64 rounded-lg overflow-hidden">
+                                                        <img
+                                                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg"
+                                                            alt=""
+                                                            className="w-full h-full object-center object-cover"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <a
+                                        href="#"
+                                        className="inline-block text-center bg-indigo-600 border border-transparent rounded-md py-3 px-8 font-medium text-white hover:bg-indigo-700"
+                                    >
+                                        View Gal
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <section className="flex flex-col gap-5 w-[60%]">
 
@@ -51,7 +137,7 @@ export default function About() {
                                 width={100}
                                 height={100}
                                 alt="Picture of the author" />
-                            <h4 className="font-semibold">Dilan Espinoza</h4>
+                            <h4 className="font-semibold">Dereck Arteaga </h4>
                             <p className="text-neutral-600">Lider</p>
                         </div>
                         <div className="flex flex-col items-center justify-center gap-1">
@@ -60,7 +146,16 @@ export default function About() {
                                 width={100}
                                 height={100}
                                 alt="Picture of the author" />
-                            <h4 className="font-semibold">Dilan Espinoza</h4>
+                            <h4 className="font-semibold">Daniela Rodrigez</h4>
+                            <p className="text-neutral-600">C</p>
+                        </div>
+                        <div className="flex flex-col items-center justify-center gap-1">
+                            <Image
+                                src="https://robohash.org/pepelian"
+                                width={100}
+                                height={100}
+                                alt="Picture of the author" />
+                            <h4 className="font-semibold">Fernando Olivo</h4>
                             <p className="text-neutral-600">Lider</p>
                         </div>
                         <div className="flex flex-col items-center justify-center gap-1">
@@ -69,7 +164,7 @@ export default function About() {
                                 width={100}
                                 height={100}
                                 alt="Picture of the author" />
-                            <h4 className="font-semibold">Dilan Espinoza</h4>
+                            <h4 className="font-semibold">Dilan Salcedo</h4>
                             <p className="text-neutral-600">Lider</p>
                         </div>
                         {/* <div id="temm"></div> */}

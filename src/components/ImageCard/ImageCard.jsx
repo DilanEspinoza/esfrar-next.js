@@ -2,8 +2,7 @@ import Link from "next/link"
 
 import Image from "next/image"
 
-export const PhotoCard = ({ url_photo, id }) => {
-
+export const ImageCard = ({ url_photo, id }) => {
     return (
         <>
             <article className=" ">

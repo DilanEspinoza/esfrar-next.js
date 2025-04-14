@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 
 
 
-export const useFetchSingleImage = (image_id) => {
+export default function useFetchSingleImage(image_id) {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)

@@ -62,6 +62,8 @@ export default function Login() {
 
       if (res.status === 200) {
         localStorage.setItem("token", res.data.token)
+        localStorage.setItem("user", JSON.stringify(res.data.user))
+
       }
 
       toast.success(`${res.data.message}`, {
@@ -102,7 +104,7 @@ export default function Login() {
       <div className='min-h-full flex flex-col items-center h-screen justify-center py-12 sm:px-6 lg:px-8'>
         <div className='sm:mx-auto sm:w-full sm:max-w-md flex flex-col gap-3'>
           <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900 '>
-            Log in
+            Iniciar Sección
           </h2>
           <div className='w-full border-t border-gray-300' />
 
@@ -120,7 +122,7 @@ export default function Login() {
                 <label
                   htmlFor='email'
                   className='block text-sm font-medium text-gray-700'>
-                  Email address
+                  Correo electronico
                 </label>
                 <div className='mt-1'>
                   <input
@@ -137,7 +139,7 @@ export default function Login() {
                 <label
                   htmlFor='password'
                   className='block text-sm font-medium text-gray-700'>
-                  Password
+                  Contraseña
                 </label>
                 <div className='mt-1 relative'>
                   <input
@@ -154,7 +156,7 @@ export default function Login() {
                     type='button'
                     onClick={togglePasswordVisibility}
                     className='absolute inset-y-0 right-0 flex items-center px-2 text-sm text-gray-500'>
-                    {showPassword ? "Hide" : "Show"}
+                    {showPassword ? "Ocultar" : "Mostrar"}
                   </button>
                 </div>
               </div>
@@ -170,7 +172,7 @@ export default function Login() {
                   <label
                     htmlFor='remember-me'
                     className='ml-2 block text-sm text-gray-900'>
-                    Remember me
+                    Recordarme
                   </label>
                 </div>
 
@@ -178,7 +180,7 @@ export default function Login() {
                   <a
                     href='#'
                     className='font-medium text-indigo-600 hover:text-indigo-500'>
-                    Forgot your password?
+                    ¿Olvide mi contraseña?
                   </a>
                 </div>
               </div>
@@ -187,7 +189,7 @@ export default function Login() {
                 <button
                   type='submit'
                   className='w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'>
-                  Sign in
+                  Acceder
                 </button>
               </div>
             </form>

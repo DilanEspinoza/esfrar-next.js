@@ -1,19 +1,19 @@
 const navigation = {
     about: [
-        { name: "About", href: "about" },
-        { name: "Team", href: "/about#team" },
+        { name: "Sobre nosotros", href: "about" },
+        { name: "Equipo", href: "/about#team" },
         { name: "Bolg", href: "" },
 
     ],
     support: [
         { name: "FQA", href: "fqa" },
-        { name: "Contribute", href: "contributing" },
-        { name: "Contact us", href: "contact" },
+        // { name: "Contribute", href: "contributing" },
+        { name: "Contactanos", href: "contact" },
     ],
 
     legal: [
-        { name: "Terms", href: "terms" },
-        { name: "Privacy", href: "terms/privacy" },
+        { name: "Términos", href: "terms" },
+        // { name: "Privacy", href: "terms/privacy" },
     ],
     social: [
         {
@@ -149,7 +149,7 @@ export const Footer = () => {
                     </div>
                     <div className='mt-12 border-t border-gray-200 pt-8'>
                         <p className='text-base text-gray-400 xl:text-center'>
-                            &copy; 2020 Your Company, Inc. All rights reserved.
+                            &copy; 2025 Esfrar, Inc. Todos los derechos reservados.
                         </p>
                     </div>
                 </div>

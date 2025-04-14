@@ -1,15 +1,3 @@
-/* "use client"
-
-import { useRouter } from "next/router"
-
-const router = useRouter()
-const image_id = router.query.image-id
- */
-
-
-
-
-
 "use client"
 
 import { Footer } from "@/components/Footer/Footer";
@@ -19,11 +7,12 @@ import { CommentIcon } from "@/components/icons/CommentIcon";
 import { HeartIcon } from "@/components/icons/HeartIcon";
 import { ShareIcon } from "@/components/icons/ShareIcon";
 import { ImageDownloader } from "@/components/ImageDownloader/ImageDownloader";
-import { useFetchSingleImage } from "@/hooks/useFetchSingleImage";
-// import Image from "next/image";
+import useFetchSingleImage from "@/hooks/useFetchSingleImage";
+import { useFetchUserById } from "@/hooks/useFindUserById";
+// import { useFetchUserById } from "@/hooks/useFindUserById";
+import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-
 
 
 export default function ImagePage() {
@@ -32,21 +21,25 @@ export default function ImagePage() {
     const { image_id } = params
 
     const { data, error, loading } = useFetchSingleImage(image_id)
+    const { user_id } = data
+    console.log("console" + user_id)
+    const { userFound, errorUserFound } = useFetchUserById(user_id)
+    console.log(userFound)
 
-    console.log(data)
-    console.log(error)
+
+
 
     return (
         <>
             <Header />
             <hr className="border border-neutral-100" />
-            <main className='mt-20 w-11/12 mx-auto flex justify-around items-center gap-10 flex-wrap'>
+            <main className='my-20 w-11/12 mx-auto flex justify-around items-center gap-10 flex-wrap'>
                 <div className='w-[60%] h-[500px]'>
 
                     {loading ? <div className="bg-neutral-50 w-full h-full flex justify-center items-center">
                         <span>Cargando...</span> {/* Puedes poner una animación o un ícono de carga */}
                     </div> : data && data ? (
-                        <img
+                        <Image
                             className="rounded-2xl w-full h-full object-contain"
                             src={data.url}
                             alt={data.title}
@@ -63,7 +56,7 @@ export default function ImagePage() {
                 <aside className=' rounded-lg py-5 shadow-2xl w-[25%]  '>
                     <div className='py-5 px-7 flex flex-col gap-5'>
                         <div className='flex flex-col gap-4'>
-                            <p>Free for use under the Pexels</p>
+                            <p>Libre para usar bajo Esfrar</p>
                         </div>
                         <hr className='border border-neutral-100' />
                         <div className='flex flex-col gap-3'>
@@ -93,18 +86,18 @@ export default function ImagePage() {
 
                             <div className=''>
                                 <div className='flex justify-between'>
-                                    <p>Views</p>
+                                    <p>Vistas</p>
                                     <p>1,795</p>
                                 </div>
                                 <div className='flex justify-between'>
-                                    <p>Downloads</p>
+                                    <p>Descargas</p>
                                     <p>1,643</p>
                                 </div>
                             </div>
                         </div>
                         <hr className='border border-neutral-100' />
                         <article className='flex flex-col gap-4 w-full'>
-                            <div className='flex gap-3'>
+                            <div className='flex justify-between items-center gap-3'>
                                 <div className='flex items-center justify-center'>
                                     <img
                                         src='https://robohash.org/pepelian'
@@ -112,27 +105,18 @@ export default function ImagePage() {
                                         className='w-[50px] h-[50px] rounded-full object-cover'
                                     />
                                     <div>
-                                        <Link href={`/users/${data && data.photographer}/${data && data.id}`} >
-                                            <h4>{data && data.photographer}</h4>
+                                        <Link href={`/users/${data && data.user_id}`} >
+                                            <h4>{data && userFound.first_name}</h4>
                                         </Link>
-                                        <p className='font-light text-sm'>6 followers</p>
+                                        <p className='font-light text-sm'>0 seguidores</p>
                                     </div>
-                                </div>
-                                <button className='hover:bg-neutral-50 p-0 px-5 text-sm rounded-xl'>
-                                    Follow
-                                </button>
-                            </div>
-                            <div className='w-full'>
-                                <p>{data && data.alt}</p>
-                                <div className='my-3'>
 
-                                    <a
-                                        href={data && data.photographer_url}
-                                        className=''
-                                        target='_blank'
-                                        rel='noopener noreferrer'>
-                                        Autor
-                                    </a>
+                                </div>
+
+                                <div className="">
+                                    <button className='hover:bg-neutral-50 p-0 px-5 text-sm rounded-xl'>
+                                        Seguir
+                                    </button>
                                 </div>
                             </div>
                             <div className=''>
@@ -145,14 +129,21 @@ export default function ImagePage() {
             </main>
 
 
-
+            {/* 
             <div className='h-screen mt-20 w-11/12 mx-auto '>
-                <h2>Related free images</h2>
+                <h2 className="font-bold text-xl">Related free images</h2>
                 <div className="w-4/5 column-1 sm:columns-2 md:columns-3 lg:columns-4">
 
+          {data && data.map((image) => (
+            <ImageCard
+              key={image.id}
+              id={image.id}
+              url_photo={image.file_path} />
+          ))}
+      
                 </div>
             </div>
-            <div className='h-screen'></div>
+            <div className='h-screen'></div> */}
 
             <Footer />
         </>
