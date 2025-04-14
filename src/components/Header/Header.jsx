@@ -62,8 +62,8 @@ export const Header = () => {
     const handleClickBtnLogout = () => {
         localStorage.removeItem("token")
         localStorage.removeItem("user")
-        // window.location.reload();
         router.push("/")
+        window.location.reload();
     }
 
 
@@ -141,10 +141,7 @@ export const Header = () => {
 
                                         <Link href={`/dashboard`}>Dashboard</Link>
                                     </div>
-                                    {/*   <div className="hover:bg-neutral-100 w-full p-2 rounded-lg hover:text-black hover:cursor-pointer">
 
-                                        <Link href="">Configuración</Link>
-                                    </div> */}
 
                                     <div onClick={handleClickBtnLogout} className="hover:bg-neutral-100 w-full p-2 rounded-lg hover:text-black hover:cursor-pointer">
 
