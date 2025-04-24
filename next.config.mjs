@@ -5,7 +5,7 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: "https",
-				hostname: "bkd-esfrar-expresjs-production.up.railway.app",
+				hostname: "backend-esfrar-production.up.railway.app",
 				pathname: "/uploads/**",
 			},
 		],
