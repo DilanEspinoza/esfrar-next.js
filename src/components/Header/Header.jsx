@@ -145,7 +145,7 @@ export const Header = () => {
 
                                     <div onClick={handleClickBtnLogout} className="hover:bg-neutral-100 w-full p-2 rounded-lg hover:text-black hover:cursor-pointer">
 
-                                        <p >Cerrar Seción</p>
+                                        <p >Cerrar Sesión</p>
                                     </div>
                                 </div> : ""}
                             </div>}
