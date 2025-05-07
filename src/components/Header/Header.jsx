@@ -105,7 +105,7 @@ export const Header = () => {
                         {!isLogin ? <div>
                             <Link href={`login`}>
                                 <button className='py-2 px-5 rounded-2xl cursor-pointer lg:hover:bg-neutral-100 '>
-                                    Iniciar Seción
+                                    Iniciar Sesión
                                 </button>
                             </Link>
                             <Link href={`register`}>
