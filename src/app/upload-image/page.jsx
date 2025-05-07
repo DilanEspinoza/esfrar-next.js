@@ -153,7 +153,7 @@ export default function UploadImage() {
             <Header />
             <main className="w-full my-14">
                 <form className="w-[60%]  mx-auto p-10 bg-neutral-50 border border-neutral-200 rounded-4xl" method="post" onSubmit={handleOnSubmit}>
-                    <div className="flex justify-between">
+                    <div className="flex flex-col md:flex-row justify-between">
                         <div className="flex flex-col justify-center items-center">
                             <input
                                 type="file"
