@@ -154,7 +154,7 @@ export default function UploadImage() {
             <main className="w-full my-14">
                 <form className="w-[60%]  mx-auto p-10 bg-neutral-50 border border-neutral-200 rounded-4xl" method="post" onSubmit={handleOnSubmit}>
                     <div className="flex flex-col md:flex-row justify-between">
-                        <div className="flex flex-col justify-center items-center">
+                        <div className="flex flex-col justify-center items-center w-">
                             <input
                                 type="file"
                                 accept="image/*"
@@ -173,8 +173,8 @@ export default function UploadImage() {
                             )}
                         </div>
 
-                        <div className="flex flex-col gap-6 w-[50%] ">
-                            <div className="flex flex-col gap-1">
+                        <div className="flex flex-col gap-6 w-[90%] ">
+                            <div className="flex flex-col gap-1 w-full md:w-auto">
                                 <label htmlFor="title" className="font-bold">Titulo</label>
                                 <input
                                     className="outline-none p-1.5 rounded-md border border-neutral-400"
@@ -187,7 +187,7 @@ export default function UploadImage() {
                                 />
                             </div>
 
-                            <div className="flex flex-col gap-3">
+                            <div className="flex flex-col gap-3 w-full md:w-auto">
                                 <label htmlFor="tags" className="font-bold">Etiqutas</label>
                                 <input
                                     value={tag.title}
@@ -217,7 +217,7 @@ export default function UploadImage() {
                                 </div>
                             </div>
 
-                            <div className="flex flex-col gap-1">
+                            <div className="flex flex-col gap-1 w-full md:w-auto">
                                 <label htmlFor="location" className="font-bold ">Ubicación</label>
                                 <input
                                     className="outline-none p-1.5 rounded-md border border-neutral-400"
@@ -229,9 +229,9 @@ export default function UploadImage() {
                                     onChange={handleOnChangeInput}
                                 />
                             </div>
-                            <div className="flex justify-center">
+                            <div className="flex justify-center  ">
 
-                                <button type="submit" className=" w-[50%] text-white bg-blue-600 p-2 rounded-3xl cursor-pointer">
+                                <button type="submit" className="w-full  md:w-[50%] text-white bg-blue-600 p-2 rounded-3xl cursor-pointer">
                                     Subir Imagen
                                 </button>
                             </div>
