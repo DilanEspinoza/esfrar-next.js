@@ -32,10 +32,10 @@ export default function FQA() {
     return (
         <>
             <Header />
-            <div className="m-30 flex flex-col gap-20 ">
+            <div className="m-5 lg:m-30 flex flex-col gap-20 ">
 
                 <h2 className="text-center text-5xl font-bold">Preguntas frecuentes</h2>
-                <main className="w-auto mx-10 lg:w-[80%] lg:mx-auto flex flex-col lg:items-center gap-10  ">
+                <main className="w-auto mx-auto lg:w-[80%]  flex flex-col lg:items-center gap-10  ">
                     {data.map((e) => (
                         <SingleQuestion key={e.id} question={e.question}
                             answer={e.answer} />

@@ -80,7 +80,7 @@ export default function Login() {
     } catch (err) {
       console.error("Error:", err);
 
-      toast.error(`${err}`, {
+      toast.error(`Hubo un error al intentar hacer login`, {
         duration: 4000,
         progress: true,
         position: "bottom-right",

@@ -128,7 +128,7 @@ export default function UploadImage() {
                 sound: false,
             });
         } catch (err) {
-            toast.error(`${err}`, {
+            toast.error(`Error al subir la imagen`, {
                 duration: 4000,
                 progress: true,
                 position: "bottom-right",
@@ -152,13 +152,15 @@ export default function UploadImage() {
         <>
             <Header />
             <main className="w-full my-14">
-                <form className="w-full md:w-[60%]  mx-auto p-10 bg-neutral-50 border border-neutral-200 rounded-4xl" method="post" onSubmit={handleOnSubmit}>
-                    <div className="flex flex-col md:flex-row justify-between">
-                        <div className="flex flex-col justify-center items-center w-">
+                <form className="  w-full md:w-[60%]  mx-auto p-10 bg-neutral-50 border border-neutral-200 rounded-4xl"
+                    method="post" onSubmit={handleOnSubmit}>
+                    <div className="flex flex-col md:flex-row justify-between gap-20">
+                        <div className="flex flex-col justify-center items-center ">
                             <input
                                 type="file"
                                 accept="image/*"
                                 onChange={handleImageChange}
+                                required
                                 className="border text-center border-dashed border-white text-white p-4 bg-neutral-700 cursor-pointer"
                             />
                             {isClient && image && typeof image === "object" && (
@@ -184,6 +186,8 @@ export default function UploadImage() {
                                     onChange={handleOnChangeInput}
                                     value={inputValue.title}
                                     name="title"
+                                    required
+
                                 />
                             </div>
 
@@ -196,6 +200,7 @@ export default function UploadImage() {
                                     type="text"
                                     placeholder="Enter tags"
                                     id="tags"
+
                                 />
                                 <div className="flex justify-between">
                                     <div className="flex gap-3 items-center">
@@ -227,6 +232,7 @@ export default function UploadImage() {
                                     name="location"
                                     value={inputValue.location}
                                     onChange={handleOnChangeInput}
+                                    required
                                 />
                             </div>
                             <div className="flex justify-center  ">

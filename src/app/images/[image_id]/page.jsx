@@ -33,14 +33,14 @@ export default function ImagePage() {
         <>
             <Header />
             <hr className="border border-neutral-100" />
-            <main className='my-20 w-11/12 mx-auto flex justify-around items-center gap-10 flex-wrap'>
+            <main className='my-20 w-11/12 mx-auto flex flex-col lg:flex-row justify-evenly lg:justify-around items-center gap-10 flex-wrap'>
                 <div className='w-[60%] h-[500px]'>
 
                     {loading ? <div className="bg-neutral-50 w-full h-full flex justify-center items-center">
                         <span>Cargando...</span> {/* Puedes poner una animación o un ícono de carga */}
                     </div> : data && data ? (
                         <Image
-                            className="rounded-2xl w-full h-full object-contain"
+                            className="rounded-2xl w-full h-full lg:object-contain object-cover"
                             src={data.url}
                             alt={data.title}
                             width={400}
@@ -53,7 +53,7 @@ export default function ImagePage() {
                 </div>
 
 
-                <aside className=' rounded-lg py-5 shadow-2xl w-[25%]  '>
+                <aside className=' rounded-lg py-5 shadow-2xl w-full lg:w-[25%]  '>
                     <div className='py-5 px-7 flex flex-col gap-5'>
                         <div className='flex flex-col gap-4'>
                             <p>Libre para usar bajo Esfrar</p>
