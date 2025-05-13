@@ -16,9 +16,9 @@ export const SingleQuestion = ({ question, answer }) => {
 
     return (
 
-        <div className="w-full lg:w-[80%] flex gap-5 flex-col lg:justify-between lg:gap-5 lg:shadow-green-500 shadow-lg lg:border-t border border-l rounded-2xl bg-neutral-100 text-start px-5 py-4">
+        <div className="w-full  lg:w-[80%] flex gap-5 flex-col lg:justify-between lg:gap-5 lg:shadow-green-500 shadow-lg lg:border-t border border-l rounded-2xl bg-neutral-100  p-5 ">
             <div
-                className="  text-2xl flex justify-between items-center cursor-pointer"
+                className=" text-2xl flex justify-between items-center cursor-pointer"
                 onClick={handleClickBtnQuestion}>
                 <h2 className="font-medium">{question}</h2>
 
@@ -35,7 +35,9 @@ export const SingleQuestion = ({ question, answer }) => {
             </div>
             <div className="block lg:hidden  justify-center">
 
-                <button className="cursor-pointer bg-green-300  p-2.5 rounded-xl" onClick={handleClickBtnQuestion}>shadow</button>
+                <button className="cursor-pointer text-indigo-400 hover:text-indigo-500 p-2.5 rounded-xl" onClick={handleClickBtnQuestion}>
+                    {!btnQuestion ? "Mostrar" : "Ocultar"}
+                </button>
             </div>
         </div>
     )
