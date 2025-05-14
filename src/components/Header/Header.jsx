@@ -129,7 +129,7 @@ export const Header = () => {
 
 
                     </div></nav>
-                : <div>
+                <div>
                     <div
                         onClick={handleUserMenu}
                         className="bg-neutral-900 flex justify-center items-center rounded-full cursor-pointer">
