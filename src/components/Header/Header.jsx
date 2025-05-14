@@ -129,50 +129,49 @@ export const Header = () => {
 
 
                     </div></nav>
-            </div>
-            : <div>
-                <div
-                    onClick={handleUserMenu}
-                    className="bg-neutral-900 flex justify-center items-center rounded-full cursor-pointer">
-                    <Image
-                        src={`https://robohash.org/${username}`}
-                        alt="User Avatar"
-                        width={50}
-                        height={50}
-                        className="rounded-full"
-                    />
+                : <div>
+                    <div
+                        onClick={handleUserMenu}
+                        className="bg-neutral-900 flex justify-center items-center rounded-full cursor-pointer">
+                        <Image
+                            src={`https://robohash.org/${username}`}
+                            alt="User Avatar"
+                            width={50}
+                            height={50}
+                            className="rounded-full"
+                        />
+                    </div>
+                    {clickUserAvatar ? <div className="absolute z-50 flex flex-col gap-2 top-15 right-3 w-52 bg-neutral-800 p-5 text-start ¿ rounded-lg text-white ">
+                        <p className="font-bold text-white truncate">{username}</p>
+
+                        <hr />
+
+                        <div className="hover:bg-blue-600 w-full p-2 rounded-lg hover:text-white hover:cursor-pointer">
+                            <Link href="/upload-image" className=" ">
+                                Subir
+                            </Link>
+                        </div>
+
+
+
+                        <div className="hover:bg-neutral-100 w-full p-2 rounded-lg hover:text-black hover:cursor-pointer">
+
+                            <Link href={`/users/${userId}`}>Mi Perfil</Link>
+                        </div>
+                        <div className="hover:bg-neutral-100 w-full p-2 rounded-lg hover:text-black hover:cursor-pointer">
+
+                            <Link href={`/dashboard`}>Dashboard</Link>
+                        </div>
+
+
+                        <div onClick={handleClickBtnLogout} className="hover:bg-neutral-100 w-full p-2 rounded-lg hover:text-black hover:cursor-pointer">
+
+                            <p >Cerrar Sesión</p>
+                        </div>
+                    </div> : ""}
                 </div>
-                {clickUserAvatar ? <div className="absolute z-50 flex flex-col gap-2 top-15 right-3 w-52 bg-neutral-800 p-5 text-start ¿ rounded-lg text-white ">
-                    <p className="font-bold text-white truncate">{username}</p>
 
-                    <hr />
-
-                    <div className="hover:bg-blue-600 w-full p-2 rounded-lg hover:text-white hover:cursor-pointer">
-                        <Link href="/upload-image" className=" ">
-                            Subir
-                        </Link>
-                    </div>
-
-
-
-                    <div className="hover:bg-neutral-100 w-full p-2 rounded-lg hover:text-black hover:cursor-pointer">
-
-                        <Link href={`/users/${userId}`}>Mi Perfil</Link>
-                    </div>
-                    <div className="hover:bg-neutral-100 w-full p-2 rounded-lg hover:text-black hover:cursor-pointer">
-
-                        <Link href={`/dashboard`}>Dashboard</Link>
-                    </div>
-
-
-                    <div onClick={handleClickBtnLogout} className="hover:bg-neutral-100 w-full p-2 rounded-lg hover:text-black hover:cursor-pointer">
-
-                        <p >Cerrar Sesión</p>
-                    </div>
-                </div> : ""}
-            </div>
-                }
-        </header >
+            </header >
         </>
     );
 };
