@@ -76,7 +76,7 @@ export default function Register() {
 
         } catch (err) {
             console.log(err)
-            toast.error("Error al registrar al nuevo usuario", {
+            toast.error(err, {
                 duration: 4000,
                 progress: true,
                 position: "bottom-right",
