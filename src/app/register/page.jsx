@@ -59,7 +59,7 @@ export default function Register() {
                         }
                     })
 
-            toast.success(`${res.data.result}`, {
+            toast.success(`${res.data.message}`, {
                 duration: 4000,
                 progress: true,
                 position: "bottom-right",
@@ -68,6 +68,7 @@ export default function Register() {
                 sound: false,
             });
 
+            console.log("resssssssss")
             console.log(res)
             if (res.status === 201) {
                 router.push("/login");
@@ -76,7 +77,7 @@ export default function Register() {
 
         } catch (err) {
             console.log(err)
-            toast.error("Error al registrar al nuevo usuario", {
+            toast.error(err.response.data.message, {
                 duration: 4000,
                 progress: true,
                 position: "bottom-right",
