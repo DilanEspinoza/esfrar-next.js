@@ -76,7 +76,7 @@ export default function Register() {
 
 
         } catch (err) {
-            console.log(err)
+
             toast.error(err.response.data.message, {
                 duration: 4000,
                 progress: true,

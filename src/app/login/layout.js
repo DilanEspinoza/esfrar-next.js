@@ -1,5 +1,5 @@
 export const metadata = {
-	title: "Iniciar Sección | Esfrar",
+	title: "Iniciar Sesión | Esfrar",
 	description: "Login of esfrar",
 };
 
