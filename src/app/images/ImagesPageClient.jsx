@@ -12,7 +12,7 @@ export default function ImagesPageClient() {
     const search = searchParams.get("search") || ""
 
     const [numPage, setNumPage] = useState(1)
-    const { data, loading } = useFetchImagesSearch(search)
+    // console.log(data)
 
     const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" })
     const handleClickPrev = () => {
@@ -24,8 +24,11 @@ export default function ImagesPageClient() {
         scrollToTop()
     }
 
+
+    const { data, loading } = useFetchImagesSearch(search, numPage)
     const images = data?.data || []
     const totalPages = data?.totalPages || 1
+
 
     return (
         <>

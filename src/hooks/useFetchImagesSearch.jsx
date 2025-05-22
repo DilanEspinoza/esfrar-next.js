@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios"; // o fetch si prefieres
 
-const useFetchImagesSearch = (name, limit = 10) => {
+const useFetchImagesSearch = (search, page = 1, limit = 10) => {
 
   const [loading, setLoading] = useState(true); // Para mostrar carga
   const [data, setData] = useState([])
@@ -13,8 +13,7 @@ const useFetchImagesSearch = (name, limit = 10) => {
 
 
       try {
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/images/search?search=${name}&page=1&limit=${limit}`,);
-        console.log(res.data)
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/images/search?search=${search}&page=${page}&limit=${limit}`,);
         setData(res.data)
         setLoading(false)
       } catch (error) {
@@ -25,7 +24,7 @@ const useFetchImagesSearch = (name, limit = 10) => {
 
 
     getImages();
-  }, [name]);
+  }, [search, page]);
 
 
 
