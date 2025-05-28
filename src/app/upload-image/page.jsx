@@ -4,8 +4,7 @@ import { Header } from "@/components/Header/Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useUserContext } from "@/context/UserContext";
-import { toast } from "react-toastify";
+import { Bounce, toast } from "react-toastify";
 
 
 
