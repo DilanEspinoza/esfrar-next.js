@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer/Footer"
 import axios from "axios"
 import { toast } from "nextjs-toast-notify";
 import { useRouter } from "next/navigation"
+import { Modal } from '../components/Modal'
 
 
 export default function Dashboard() {
@@ -14,6 +15,8 @@ export default function Dashboard() {
     const [images, setImages] = useState([])
     const [error, setError] = useState(null)
     const [userId, setUserId] = useState(null)
+
+    const [showModal, setShowModal] = useState(false);
 
 
     const router = useRouter()
@@ -35,7 +38,7 @@ export default function Dashboard() {
             })
     }, [])
 
-    const handleDelete = async (imageId) => {
+    const handleOnClick = async (imageId) => {
         if (!userId) return alert("Usuario no identificado")
 
         try {
@@ -68,6 +71,7 @@ export default function Dashboard() {
             });
         }
     }
+    setShowModal(true)
 
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
@@ -88,7 +92,7 @@ export default function Dashboard() {
                         <div key={image.id} className="relative">
                             <ImageCard id={image.id} url_photo={image.file_path} />
                             <button
-                                onClick={() => handleDelete(image.id)}
+                                onClick={() => handleOnClick(image.id)}
                                 className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded cursor-pointer"
                             >
                                 Eliminar
