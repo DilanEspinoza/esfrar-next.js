@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useUserContext } from "@/context/UserContext";
+import { toast } from "react-toastify";
 
-import { toast } from "nextjs-toast-notify";
 
 
 export default function UploadImage() {
@@ -120,21 +120,27 @@ export default function UploadImage() {
             });
             console.log(res.data);
             toast.success(`${res.data.message}`, {
-                duration: 4000,
-                progress: true,
                 position: "bottom-right",
-                transition: "swingInverted",
-                icon: '',
-                sound: false,
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
             });
         } catch (err) {
             toast.error(`Error al subir la imagen`, {
-                duration: 4000,
-                progress: true,
                 position: "bottom-right",
-                transition: "swingInverted",
-                icon: '',
-                sound: false,
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
             });
             console.error("Error al subir la imagen:", err);
         }

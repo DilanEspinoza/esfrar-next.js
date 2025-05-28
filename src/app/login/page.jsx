@@ -6,7 +6,7 @@ import { Header } from "@/components/Header/Header";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUserContext } from "@/context/UserContext";
-import { toast } from "nextjs-toast-notify";
+import { Bounce, toast } from "react-toastify";
 
 export default function Login() {
   const { updateUserId } = useUserContext();
@@ -67,12 +67,15 @@ export default function Login() {
       }
 
       toast.success(`${res.data.message}`, {
-        duration: 4000,
-        progress: true,
         position: "bottom-right",
-        transition: "swingInverted",
-        icon: "",
-        sound: false,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
       });
 
       router.push("/");
@@ -82,12 +85,15 @@ export default function Login() {
       toast.error(
         err?.response?.data?.message || "Hubo un error al intentar hacer login",
         {
-          duration: 4000,
-          progress: true,
           position: "bottom-right",
-          transition: "swingInverted",
-          icon: "",
-          sound: false,
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
         }
       );
     }

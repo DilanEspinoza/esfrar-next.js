@@ -6,6 +6,7 @@ import SplashScreen from "../components/SplashScreen/SplashScreen"; // Asegúrat
 import "./globals.css";
 import { UserProvider } from "@/context/UserContext"; // Si tienes contexto de usuario
 import { metadata } from "./metadata"; // Aquí importas el metadata
+import { ToastContainer } from "react-toastify";
 
 const poppins = Poppins({
 	subsets: ["latin"],
@@ -51,6 +52,18 @@ export default function RootLayout({ children }) {
 					{showSplash && <SplashScreen isVisible={!fadeOut} />}
 					{appReady && children}{" "}
 					{/* Carga el contenido de la app solo después de la animación */}
+					<ToastContainer
+						position='bottom-right'
+						autoClose={4000}
+						hideProgressBar={false}
+						newestOnTop={false}
+						closeOnClick
+						rtl={false}
+						pauseOnFocusLoss
+						draggable
+						pauseOnHover
+						theme='light'
+					/>
 				</UserProvider>
 			</body>
 		</html>

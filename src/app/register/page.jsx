@@ -2,9 +2,9 @@
 
 import axios from "axios";
 import { useState } from "react";
-import { toast } from "nextjs-toast-notify";
 import { Header } from "@/components/Header/Header";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 
 export default function Register() {
@@ -60,12 +60,15 @@ export default function Register() {
                     })
 
             toast.success(`${res.data.message}`, {
-                duration: 4000,
-                progress: true,
                 position: "bottom-right",
-                transition: "swingInverted",
-                icon: '',
-                sound: false,
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
             });
 
             console.log("resssssssss")
@@ -78,12 +81,15 @@ export default function Register() {
         } catch (err) {
 
             toast.error(err.response.data.message, {
-                duration: 4000,
-                progress: true,
                 position: "bottom-right",
-                transition: "swingInverted",
-                icon: '',
-                sound: false,
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
             });
         }
 
