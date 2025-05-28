@@ -1,14 +1,13 @@
-"use client"
+'use client'
 
 import { useEffect, useState } from "react"
 import { ImageCard } from "@/components/ImageCard/ImageCard"
 import { Header } from "@/components/Header/Header"
 import { Footer } from "@/components/Footer/Footer"
 import axios from "axios"
-import { toast } from "nextjs-toast-notify";
 import { useRouter } from "next/navigation"
-import { Modal } from '../components/Modal'
-
+import { Modal } from '@/components/Modal/Modal' // asegurate que es el modal que hicimos con Tailwind
+import { Bounce, toast } from "react-toastify"
 
 export default function Dashboard() {
     const [token, setToken] = useState(null);
@@ -17,7 +16,7 @@ export default function Dashboard() {
     const [userId, setUserId] = useState(null)
 
     const [showModal, setShowModal] = useState(false);
-
+    const [imageToDelete, setImageToDelete] = useState(null);
 
     const router = useRouter()
 
@@ -38,40 +37,58 @@ export default function Dashboard() {
             })
     }, [])
 
-    const handleOnClick = async (imageId) => {
-        if (!userId) return alert("Usuario no identificado")
+    // Abrir modal y asignar imagen a eliminar
+    const confirmDelete = (imageId) => {
+        setImageToDelete(imageId)
+        setShowModal(true)
+    }
+
+    // Eliminar imagen confirmada
+    const handleDelete = async () => {
+        if (!userId || !imageToDelete) {
+            setShowModal(false)
+            return alert("Usuario o imagen no identificados")
+        }
 
         try {
-            await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/images/${imageId}`, {
+            await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/images/${imageToDelete}`, {
                 data: {
-                    image_id: imageId,
+                    image_id: imageToDelete,
                     user_id: userId,
                 }
             })
 
-            setImages(prev => prev.filter(img => img.id !== imageId))
+            setImages(prev => prev.filter(img => img.id !== imageToDelete))
 
             toast.success("Imagen eliminada con éxito", {
-                duration: 4000,
-                progress: true,
                 position: "bottom-right",
-                transition: "swingInverted",
-                icon: '',
-                sound: false,
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
             });
         } catch (err) {
             console.error(err)
             toast.error("Error al eliminar la imagen ", {
-                duration: 4000,
-                progress: true,
                 position: "bottom-right",
-                transition: "swingInverted",
-                icon: '',
-                sound: false,
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: false,
+                draggable: false,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
             });
+        } finally {
+            setShowModal(false)
+            setImageToDelete(null)
         }
     }
-    setShowModal(true)
 
     useEffect(() => {
         const storedToken = localStorage.getItem("token");
@@ -81,6 +98,7 @@ export default function Dashboard() {
             router.push("/login");
         }
     }, []);
+
     return (
         <>
             <Header />
@@ -92,7 +110,7 @@ export default function Dashboard() {
                         <div key={image.id} className="relative">
                             <ImageCard id={image.id} url_photo={image.file_path} />
                             <button
-                                onClick={() => handleOnClick(image.id)}
+                                onClick={() => confirmDelete(image.id)} // cambiar aquí
                                 className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded cursor-pointer"
                             >
                                 Eliminar
@@ -105,7 +123,25 @@ export default function Dashboard() {
             </main>
             <Footer />
 
-            {/* Aquí renderizas los toasts */}
+            {/* Modal de confirmación */}
+            <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+                <h2 className="text-xl font-semibold mb-4">Confirmar eliminación</h2>
+                <p>¿Estás seguro que quieres eliminar esta imagen?</p>
+                <div className="mt-6 flex justify-end gap-4">
+                    <button
+                        onClick={() => setShowModal(false)}
+                        className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400"
+                    >
+                        Cancelar
+                    </button>
+                    <button
+                        onClick={handleDelete}
+                        className="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700"
+                    >
+                        Sí, eliminar
+                    </button>
+                </div>
+            </Modal>
         </>
     )
 }
