@@ -18,7 +18,6 @@ export const useFetchImages = () => {
                         'Content-Type': 'application/json',
                     }
                 })
-                console.log(res.data)
                 setData(res.data)
 
             } catch (error) {
