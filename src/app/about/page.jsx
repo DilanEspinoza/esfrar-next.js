@@ -19,7 +19,7 @@ export default function About() {
                         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 sm:static">
                             <div className="sm:max-w-lg">
                                 <h1 className="text-4xl font font-extrabold tracking-tight text-gray-900 sm:text-6xl">
-                                    La galería gratuita definitiva
+                                    Portafolio digital online
                                 </h1>
                                 <p className="mt-4 text-xl text-gray-500">
                                     Esta galería ha sido creada para diseñadores, desarrolladores y para todo tipo de personas brindandoles acceso a una colección gratuita de imágenes que podran ser utilizadas sin restricción alguna.
@@ -37,37 +37,14 @@ export default function About() {
                                                 <div className="flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8">
                                                     <div className="w-44 h-64 rounded-lg overflow-hidden sm:opacity-0 lg:opacity-100">
                                                         <img
-                                                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
+                                                            src="image-about-1.jpg"
                                                             alt=""
                                                             className="w-full h-full object-center object-cover"
                                                         />
                                                     </div>
                                                     <div className="w-44 h-64 rounded-lg overflow-hidden">
                                                         <img
-                                                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-02.jpg"
-                                                            alt=""
-                                                            className="w-full h-full object-center object-cover"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className="flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8">
-                                                    <div className="w-44 h-64 rounded-lg overflow-hidden">
-                                                        <img
-                                                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-03.jpg"
-                                                            alt=""
-                                                            className="w-full h-full object-center object-cover"
-                                                        />
-                                                    </div>
-                                                    <div className="w-44 h-64 rounded-lg overflow-hidden">
-                                                        <img
-                                                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-04.jpg"
-                                                            alt=""
-                                                            className="w-full h-full object-center object-cover"
-                                                        />
-                                                    </div>
-                                                    <div className="w-44 h-64 rounded-lg overflow-hidden">
-                                                        <img
-                                                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-05.jpg"
+                                                            src="image-about-2.jpg"
                                                             alt=""
                                                             className="w-full h-full object-center object-cover"
                                                         />
@@ -76,14 +53,37 @@ export default function About() {
                                                 <div className="flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8">
                                                     <div className="w-44 h-64 rounded-lg overflow-hidden">
                                                         <img
-                                                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-06.jpg"
+                                                            src="image-about-3.jpg"
                                                             alt=""
                                                             className="w-full h-full object-center object-cover"
                                                         />
                                                     </div>
                                                     <div className="w-44 h-64 rounded-lg overflow-hidden">
                                                         <img
-                                                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg"
+                                                            src="/logo-colegio.jpg"
+                                                            alt=""
+                                                            className="w-full h-full  object-center object-contain"
+                                                        />
+                                                    </div>
+                                                    <div className="w-44 h-64 rounded-lg overflow-hidden">
+                                                        <img
+                                                            src="image-about-4.jpg"
+                                                            alt=""
+                                                            className="w-full h-full object-center object-cover"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="flex-shrink-0 grid grid-cols-1 gap-y-6 lg:gap-y-8">
+                                                    <div className="w-44 h-64 rounded-lg overflow-hidden">
+                                                        <img
+                                                            src="image-about-5.jpg"
+                                                            alt=""
+                                                            className="w-full h-full object-center object-cover"
+                                                        />
+                                                    </div>
+                                                    <div className="w-44 h-64 rounded-lg overflow-hidden">
+                                                        <img
+                                                            src="image-about-6.jpg"
                                                             alt=""
                                                             className="w-full h-full object-center object-cover"
                                                         />
