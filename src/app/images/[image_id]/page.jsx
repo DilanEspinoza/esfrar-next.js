@@ -9,10 +9,12 @@ import { ShareIcon } from "@/components/icons/ShareIcon";
 import { ImageDownloader } from "@/components/ImageDownloader/ImageDownloader";
 import useFetchSingleImage from "@/hooks/useFetchSingleImage";
 import { useFetchUserById } from "@/hooks/useFindUserById";
+import axios from "axios";
 // import { useFetchUserById } from "@/hooks/useFindUserById";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 
 export default function ImagePage() {
@@ -22,11 +24,54 @@ export default function ImagePage() {
 
     const { data, error, loading } = useFetchSingleImage(image_id)
     const { user_id } = data
-    console.log("console" + user_id)
     const { userFound, errorUserFound } = useFetchUserById(user_id)
-    console.log(userFound)
 
 
+    const [likes, setLikes] = useState(0);
+    const [hasLiked, setHasLiked] = useState(false);
+
+    const userId = userFound?.id;
+
+    useEffect(() => {
+        const fetchLikesData = async () => {
+            try {
+                // Obtener número de likes
+                const resCount = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/images/${image_id}/likes/count`);
+                const countData = await resCount.json();
+                setLikes(countData.likes);
+
+                // Verificar si el usuario actual ya dio like
+                if (userId) {
+                    const resCheck = await fetch(
+                        `${process.env.NEXT_PUBLIC_API_URL}/api/images/${image_id}/likes/check?user_id=${userId}`
+                    );
+                    const checkData = await resCheck.json();
+                    setHasLiked(checkData.hasLiked);
+                }
+            } catch (err) {
+                console.error("Error al cargar información de likes", err);
+            }
+        };
+
+        fetchLikesData();
+    }, [image_id, userId]);
+    const handleLike = async () => {
+        try {
+            if (!hasLiked) {
+                // Dar like
+                await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/images/${image_id}/like`, { user_id: userId });
+                setLikes(prev => prev + 1);
+                setHasLiked(true);
+            } else {
+                // Quitar like
+                await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/images/${image_id}/like`, { data: { user_id: userId } });
+                setLikes(prev => prev - 1);
+                setHasLiked(false);
+            }
+        } catch (error) {
+            console.error("Error al cambiar like:", error);
+        }
+    };
 
 
     return (
@@ -62,9 +107,10 @@ export default function ImagePage() {
                         <div className='flex flex-col gap-3'>
                             <div className='flex gap-2'>
                                 <button
+                                    onClick={handleLike}
                                     className='border border-neutral-300 hover:border-neutral-600 py-2 px-8 rounded-xl'
-                                    title='like'>
-                                    <HeartIcon />
+                                    title={hasLiked ? "Quitar like" : "Dar like"}>
+                                    {hasLiked ? <HeartIcon fill="red" stroke="red" /> : <HeartIcon fill="none" stroke="black" />}
                                 </button>
                                 <button
                                     className='border border-neutral-300 hover:border-neutral-600 py-2 px-8 rounded-xl'
@@ -86,8 +132,8 @@ export default function ImagePage() {
 
                             <div className=''>
                                 <div className='flex justify-between'>
-                                    <p>Vistas</p>
-                                    <p>1,795</p>
+                                    <p>Me gusta</p>
+                                    <p>{likes}</p>
                                 </div>
                                 <div className='flex justify-between'>
                                     <p>Descargas</p>
