@@ -12,9 +12,7 @@ import { useFetchImages } from "@/hooks/useFetchImages";
 export default function Home() {
   // const { data, loading, error } = useFetchImages();
   const { data, error } = useFetchImages()
-  console.log(data && data)
-  console.log(error && error)
-  // console.log(data)
+
   return (
     <>
       <Header />
