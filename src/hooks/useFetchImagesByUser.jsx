@@ -12,7 +12,6 @@ export default function useFetchImagesByUser(user_id) {
     const fetchImages = async () => {
       try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/images/users/user?user_id=${user_id}`);
-        console.log(res.data)
         setData(res.data);
       } catch (error) {
         console.error("Error al obtener imágenes:", error);
