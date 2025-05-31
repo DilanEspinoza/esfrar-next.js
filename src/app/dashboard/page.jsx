@@ -6,16 +6,21 @@ import { Header } from "@/components/Header/Header"
 import { Footer } from "@/components/Footer/Footer"
 import axios from "axios"
 import { useRouter } from "next/navigation"
-import { Modal } from '@/components/Modal/Modal' // asegurate que es el modal que hicimos con Tailwind
+import { ModalImage } from '@/components/ModalImage/ModalImage' // asegurate que es el modal que hicimos con Tailwind
 import { Bounce, toast } from "react-toastify"
+// import { HeaderDashboard } from "@/components/HeaderDashboard/HeaderDashboard"
 
 export default function Dashboard() {
+
+
+
     const [token, setToken] = useState(null);
     const [images, setImages] = useState([])
     const [error, setError] = useState(null)
     const [userId, setUserId] = useState(null)
 
-    const [showModal, setShowModal] = useState(false);
+    const [showModalImage, setShowModalImage] = useState(false);
+
     const [imageToDelete, setImageToDelete] = useState(null);
 
     const router = useRouter()
@@ -40,13 +45,14 @@ export default function Dashboard() {
     // Abrir modal y asignar imagen a eliminar
     const confirmDelete = (imageId) => {
         setImageToDelete(imageId)
-        setShowModal(true)
+        setShowModalImage(true)
     }
+
 
     // Eliminar imagen confirmada
     const handleDelete = async () => {
         if (!userId || !imageToDelete) {
-            setShowModal(false)
+            setShowModalImage(false)
             return alert("Usuario o imagen no identificados")
         }
 
@@ -73,7 +79,7 @@ export default function Dashboard() {
             });
         } catch (err) {
             console.error(err)
-            toast.error("Error al eliminar la imagen ", {
+            toast.error("¡Hubo un error al eliminar la imagen! ", {
                 position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -85,7 +91,7 @@ export default function Dashboard() {
                 transition: Bounce,
             });
         } finally {
-            setShowModal(false)
+            setShowModalImage(false)
             setImageToDelete(null)
         }
     }
@@ -103,7 +109,8 @@ export default function Dashboard() {
         <>
             <Header />
             <main className="w-[90%] mx-auto p-5 my-10">
-                <h1 className="text-3xl font-bold mb-6">Mis imágenes</h1>
+
+                {/* <HeaderDashboard /> */}
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
                     {images.map(image => (
@@ -124,12 +131,12 @@ export default function Dashboard() {
             <Footer />
 
             {/* Modal de confirmación */}
-            <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
+            <ModalImage isOpen={showModalImage} onClose={() => setShowModalImage(false)}>
                 <h2 className="text-xl font-semibold mb-4">Confirmar eliminación</h2>
                 <p>¿Estás seguro que quieres eliminar esta imagen?</p>
                 <div className="mt-6 flex justify-end gap-4">
                     <button
-                        onClick={() => setShowModal(false)}
+                        onClick={() => setShowModalImage(false)}
                         className="px-4 py-2 rounded bg-gray-300 hover:bg-gray-400"
                     >
                         Cancelar
@@ -141,7 +148,9 @@ export default function Dashboard() {
                         Sí, eliminar
                     </button>
                 </div>
-            </Modal>
+            </ModalImage>
+
+
         </>
     )
 }
