@@ -49,7 +49,7 @@ export default function ImagePage() {
 
                 </div>
 
-                <AsideImageInfo user_id={userId} user_name={userFound.first_name} image_id={image_id} image_url={data.url} image_title={data.url} />
+                <AsideImageInfo user_id={userId} user_name={userFound.first_name} last_name={userFound.last_name} image_id={image_id} image_url={data.url} image_title={data.url} />
 
             </main>
             <Footer />
