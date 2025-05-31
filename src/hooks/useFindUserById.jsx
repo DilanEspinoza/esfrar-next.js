@@ -9,6 +9,7 @@ export const useFetchUserById = (id) => {
     const [errorUserFound, setErrorUserFound] = useState(null)
 
     useEffect(() => {
+        if (!id) return;
         const fetchUser = async () => {
 
             try {
