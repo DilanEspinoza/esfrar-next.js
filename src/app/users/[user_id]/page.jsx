@@ -20,6 +20,7 @@ export default function UserProfile() {
 
 
     const username = userFound?.first_name
+    const lastname = userFound?.last_name
     const userId = userFound?.id
 
 
@@ -44,8 +45,8 @@ export default function UserProfile() {
                     </div> */}
                     <div className="flex justify-between gap-2 mx-5">
                         <div className="flex flex-col">
-                            <p className="text-2xl font-bold">{username}</p>
-                            <div className="flex gap-4">
+                            <p className="text-2xl font-bold">Imagenes subidas por el usuario {username} {lastname}</p>
+                            {/*   <div className="flex gap-4">
                                 <div className="flex gap-1">
                                     <span>0</span>
                                     <p>Seguidores</p>
@@ -54,9 +55,9 @@ export default function UserProfile() {
                                     <span>0</span>
                                     <p>Siguiendo</p>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
-
+                        {/* 
                         <div className="flex gap-10">
                             <div className="flex flex-col gap-1">
                                 <span>0</span>
@@ -70,7 +71,7 @@ export default function UserProfile() {
                                 <span>0</span>
                                 <p>Descargas</p>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
 
