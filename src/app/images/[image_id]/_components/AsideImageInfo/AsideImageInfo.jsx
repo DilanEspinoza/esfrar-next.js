@@ -1,79 +1,52 @@
-
-// import { BookmarkIcon } from "@/components/icons/BookmarkIcon";
-// import { HeartIcon } from "@/components/icons/HeartIcon";
 // import { ShareIcon } from "@/components/icons/ShareIcon";
+import { LikeButton } from "./_components/LikeButton";
+import { FavoriteButton } from "./_components/FavoriteButton";
 import { ImageDownloader } from "@/components/ImageDownloader/ImageDownloader";
+import Image from "next/image";
 import Link from "next/link";
-// import { useLike } from "@/hooks/useLike";
-// import { useFavorite } from "@/hooks/useFavorite";
-// import Link from "next/link";
+
 
 
 export const AsideImageInfo = ({ user_id, user_name, last_name, image_id, image_url, image_title }) => {
 
-
-
-
-
     return (
-        <aside className=' rounded-lg py-5 shadow-2xl w-full lg:w-[25%]  '>
-            <div className='py-5 px-7 flex flex-col gap-5'>
-                <div className='flex gap-1'>
-                    <p>Imagen Subida por </p>
-                    <div>
+        <aside className="sticky top-6 rounded-lg py-5 shadow-2xl w-[300px] ">
+            <div className="p-5 flex flex-col gap-5">
 
-                        <Link href={`/users/${user_id}`} >
-                            <span className="font-bold">{user_name} {last_name}</span>
-                        </Link>
-                    </div>
-                </div>
-                {/* <hr className='border border-neutral-100' /> */}
-                {/*           <div className='flex flex-col gap-3'>
-
-
-
-
-                    <div className=''>
-                        <div className='flex justify-between'>
-                            <p>Me gusta</p>
-                          <p>{likesCount}</p> 
-                        </div>
-                        <div className='flex justify-between'>
-                            <p>Descargas</p>
-                            <p>1,643</p>
-                        </div>
-                    </div>
-                </div> 
-                
-                {/* <hr className='border border-neutral-100' /> */}
-                <article className='flex flex-col gap-4 w-full'>
-                    {/* <div className='flex justify-between items-center gap-3'> 
-                        <div className='flex items-center justify-center'>
-                            <img
-                                src='https://robohash.org/pepelian'
-                                alt='Fotógrafo'
-                                className='w-[50px] h-[50px] rounded-full object-cover'
+                <article className="flex flex-col gap-4 w-full justify-center">
+                    <div className="flex gap-3 justify-between">
+                        <div className="flex items-center justify-center">
+                            <Image
+                                src={`https://robohash.org/${user_name}`}
+                                alt=""
+                                className=" 
+                            rounded-full object-cover"
+                                width={50}
+                                height={50}
                             />
-                            <div>
-                                <Link href={`/users/${user_id}`} >
-                                    <h4>{user_name} {last_name}</h4>
+                            <div >
+                                <Link href={`/users/${user_id}`}>
+                                    <h4>{user_name}</h4>
                                 </Link>
-                                {/* <p className='font-light text-sm'>0 seguidores</p> 
+                                <p className="font-light text-sm">6 followers</p>
                             </div>
-
                         </div>
-
-                        {/*    <div className="">
-                            <button className='hover:bg-neutral-50 p-0 px-5 text-sm rounded-xl'>
-                                Seguir
-                            </button>
-                        </div> 
-                    </div> */}
-                    <div className=''>
-                        <ImageDownloader imageUrl={image_url} fileName={image_title} />
+                        <button className="hover:bg-neutral-100 py-3 cursor-pointer px-6  text-sm rounded-xl">Seguir</button>
                     </div>
+
                 </article>
+                <hr className="border border-neutral-100" />
+
+                <div className="flex  gap-4 justify-center">
+                    {/* button like */}
+                    <LikeButton image_id={image_id} />
+
+                    {/* button favorites */}
+                    <FavoriteButton image_id={image_id} />
+                </div>
+                <hr className="border border-neutral-100" />
+                <ImageDownloader imageUrl={image_url} file_name={image_title} />
             </div>
-        </aside>
-    )
-}
+        </aside >
+    );
+};
