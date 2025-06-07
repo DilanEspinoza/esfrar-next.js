@@ -3,32 +3,29 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 
-
-
 export default function useFetchSingleImage(image_id) {
-    const [data, setData] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const getASingleImage = async () => {
+            setLoading(true);
             try {
-                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/images/${image_id}`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                })
-                setData(res.data)
-                setLoading(false)
+                const url = `${process.env.NEXT_PUBLIC_API_URL}/api/images/${image_id}`;
+                const res = await axios.get(url);
+                setData(res.data);
+                setLoading(false);
             } catch (error) {
-                setError("Hubo un error al traer la imagene")
-                setLoading(false)
+                setError("Hubo un error al traer la imagen");
+                setLoading(false);
             }
+        };
+
+        if (image_id) {
+            getASingleImage();
         }
+    }, [image_id]);
 
-        getASingleImage()
-    }, [image_id])
-
-    return { data, error, loading }
-
+    return { data, error, loading };
 }

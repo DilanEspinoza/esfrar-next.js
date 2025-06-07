@@ -1,77 +1,106 @@
-"use client";
-
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { useSelector } from "react-redux";
+import { useAuth } from "@/context/AuthContext";
 import { Bounce, toast } from "react-toastify";
+import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const useFavorite = ({ imageId, userId }) => {
-  const [isFavorited, setIsFavorited] = useState(false);
-  const [loadingFavorite, setLoadingFavorite] = useState(true);
+export const useFavorite = (image_id) => {
+  const [hasFavorited, setHasFavorited] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Obtener estado inicial de favorito
+  const { token, isAuthenticated } = useAuth();
+  const user = useSelector((state) => state.user.user);
+
   useEffect(() => {
     const fetchFavoriteStatus = async () => {
-      if (!userId) return;
+      if (!image_id) return
+
+      setLoading(true);
+      setHasFavorited(false)
+      setError(null);
 
       try {
-        const res = await axios.get(`${API_URL}/api/images/${imageId}/favorites/check?user_id=${userId}`);
-        setIsFavorited(res.data?.isFavorited || false);
+        if (isAuthenticated && token) {
+          const res = await axios.get(
+            `${API_URL}/api/images/${image_id}/favorite/check`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          console.log(res.data)
+          setHasFavorited(res.data.hasFavorite);
+        } else {
+          setHasFavorited(false);
+        }
       } catch (err) {
-        setError("Error al verificar favoritos");
-        console.error(err);
+        console.error("Error al cargar favoritos:", err);
+        setError("Error al cargar favoritos");
       } finally {
-        setLoadingFavorite(false);
+        setLoading(false);
       }
     };
 
     fetchFavoriteStatus();
-  }, [imageId, userId]);
+  }, [image_id, token, isAuthenticated, user?.id]);
 
-  // Alternar favorito
   const toggleFavorite = async () => {
-    if (!userId) {
-      toast.warn('Debes iniciar sesión para añadir a favoritos.', {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
+    if (!isAuthenticated || !token) {
+      setError("Debes iniciar sesión para marcar como favorito");
+      /*  toast.warn("Debes iniciar sesión para agregar a favoritos", {
+         position: "bottom-right",
+         autoClose: 5000,
+         hideProgressBar: false,
+         closeOnClick: false,
+         pauseOnHover: false,
+         draggable: false,
+         progress: undefined,
+         theme: "light",
+         transition: Bounce,
+       }); */
       return;
     }
 
     try {
-      if (!isFavorited) {
-        await axios.post(`${API_URL}/api/images/${imageId}/favorite`, { user_id: userId });
-        setIsFavorited(true);
-
-      } else {
-        await axios.delete(`${API_URL}/api/images/${imageId}/favorite`, {
-          data: { user_id: userId },
+      if (!hasFavorited) {
+        await axios.post(
+          `${API_URL}/api/images/${image_id}/favorite`,
+          {},
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        setHasFavorited(true);
+        toast.success("¡Haz añadido la imagen a favoritos exitosamente!", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
         });
-        setIsFavorited(false);
+      } else {
+        await axios.delete(`${API_URL}/api/images/${image_id}/favorite`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setHasFavorited(false);
       }
     } catch (err) {
-      if (err.response?.status === 409) {
-        setIsFavorited(true); // Ya estaba, asumimos true
-      } else {
-        setError("Error al actualizar favoritos");
-        console.error(err);
-      }
+      setError("Error al cambiar favorito");
+      console.error("Error al cambiar favorito:", err);
+
     }
+
   };
 
   return {
-    isFavorited,
-    loadingFavorite,
+    hasFavorited,
+    loading,
     error,
     toggleFavorite,
+    isAuthenticated,
   };
 };

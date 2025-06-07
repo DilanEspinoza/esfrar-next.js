@@ -1,59 +1,99 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useAuth } from "@/context/AuthContext";
+import { Bounce, toast } from "react-toastify";
 import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export const useLike = ({ imageId, userId }) => {
+export const useLike = (image_id) => {
     const [hasLiked, setHasLiked] = useState(false);
-    const [likesCount, setLikesCount] = useState(0);
+
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Obtener estado inicial
+    const { token, isAuthenticated } = useAuth();
+    const user = useSelector((state) => state.user.user);
+
+
     useEffect(() => {
+
         const fetchLikeStatus = async () => {
-            if (!imageId) return;
+            if (!image_id) return;
+            setLoading(true);
+            setError(null);
+            setHasLiked(false);
+            // setLikesCount(0);
 
             try {
-                // Obtener cantidad total de likes
-                const resCount = await fetch(`${API_URL}/api/images/${imageId}/likes/count`);
-                const countData = await resCount.json();
-                setLikesCount(countData.likes);
 
-                // Verificar si el usuario ya dio like
-                if (userId) {
-                    const resCheck = await fetch(`${API_URL}/api/images/${imageId}/likes/check?user_id=${userId}`);
-                    const checkData = await resCheck.json();
-                    setHasLiked(checkData.hasLiked);
+                if (isAuthenticated && token) {
+                    const res = await axios.get(
+                        `${API_URL}/api/images/${image_id}/likes/check`,
+                        {
+                            headers: {
+                                Authorization: `Bearer ${token}`,
+                            },
+                        }
+                    );
+                    setHasLiked(res.data.hasLiked);
+                } else {
+                    setHasLiked(false);
                 }
+
             } catch (err) {
-                setError("Error al cargar datos de like");
+                setError("Error al cargar datos de likes");
                 console.error(err);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchLikeStatus();
-    }, [imageId, userId]);
 
-    // Alternar like
+        fetchLikeStatus();
+
+        // 🔁 se ejecuta cada vez que cambia el token, image_id o el usuario logueado
+    }, [image_id, token, isAuthenticated, user?.id]);
+
     const toggleLike = async () => {
-        if (!userId || !imageId) return;
+        if (!isAuthenticated || !token) {
+            setError("Debes estar logueado para dar like");
+            return;
+        }
 
         try {
             if (!hasLiked) {
-                await axios.post(`${API_URL}/api/images/${imageId}/like`, { user_id: userId });
+                await axios.post(
+                    `${API_URL}/api/images/${image_id}/like`,
+                    {},
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
                 setHasLiked(true);
-                setLikesCount((prev) => prev + 1);
+                toast.success(`¡Haz dado like exitosamente!`, {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: false,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
             } else {
-                await axios.delete(`${API_URL}/api/images/${imageId}/like`, {
-                    data: { user_id: userId },
+                await axios.delete(`${API_URL}/api/images/${image_id}/like`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
                 setHasLiked(false);
-                setLikesCount((prev) => prev - 1);
+
             }
         } catch (err) {
             setError("Error al cambiar like");
@@ -63,9 +103,9 @@ export const useLike = ({ imageId, userId }) => {
 
     return {
         hasLiked,
-        likesCount,
         loading,
         error,
         toggleLike,
+        isAuthenticated,
     };
 };
