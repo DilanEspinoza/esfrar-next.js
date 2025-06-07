@@ -1,9 +1,9 @@
 
-export const ImageDownloader = ({ imageUrl, fileName }) => {
+export const ImageDownloader = ({ image_url, file_name }) => {
     const handleDownload = async () => {
         try {
             // Descargar la imagen como un Blob
-            const response = await fetch(imageUrl);
+            const response = await fetch(image_url);
             const blob = await response.blob();
 
             // Crear una URL temporal para el Blob
@@ -12,7 +12,7 @@ export const ImageDownloader = ({ imageUrl, fileName }) => {
             // Crear un enlace dinámico para descargar la imagen
             const link = document.createElement("a");
             link.href = url;
-            link.download = fileName || "imagen_descargada.jpg";
+            link.download = file_name || "imagen_descargada.jpg";
             link.click();
 
             // Liberar la URL temporal
