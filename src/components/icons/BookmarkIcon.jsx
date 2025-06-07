@@ -1,4 +1,4 @@
-export const BookmarkIcon = ({ className = "", fill = "none", stroke = "currentColor", strokeWidth = 1.5 }) => {
+export const BookmarkIcon = ({ className = "", fill = "none", stroke = "currentColor" }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,7 +6,7 @@ export const BookmarkIcon = ({ className = "", fill = "none", stroke = "currentC
       viewBox="0 0 24 24"
       fill={fill}
       stroke={stroke}
-      strokeWidth={strokeWidth}
+      strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
     >
@@ -14,3 +14,4 @@ export const BookmarkIcon = ({ className = "", fill = "none", stroke = "currentC
     </svg>
   );
 };
+
