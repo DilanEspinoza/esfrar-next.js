@@ -3,6 +3,15 @@
 import { Footer } from "@/components/Footer/Footer";
 import { Header } from "@/components/Header/Header";
 import Image from "next/image";
+
+
+const imagesIntegrants = [
+    { id: 1, src: "/dilan-espinoza.jpg", name: "Dilan Espinoza" },
+    { id: 2, src: "/dereck-arteaga.jpeg", name: "Dereck Arteaga" },
+    { id: 3, src: "/daniela-rodriguez.jpeg", name: "Daniela Rodrigez" },
+    { id: 4, src: "/fernando-olivo.jpeg", name: "Fernando Olivo" },
+    { id: 5, src: "/dilan-salcedo.jpeg", name: "Dilan Salcedo" },]
+
 export default function About() {
     return (
         <>
@@ -122,52 +131,22 @@ export default function About() {
                     <p className="font-medium leading-relaxed text-neutral-600">
                         Conozca a los miembros de nuestro equipo.</p>
                     <div className="flex gap-10 lg:gap-20 justify-center m-4 flex-wrap ">
-                        <div className="flex flex-col items-center justify-center gap-1">
-                            <Image
-                                src="https://robohash.org/dilan"
-                                width={100}
-                                height={100}
-                                alt="Picture of the author" />
-                            <h4 className="font-semibold">Dilan Espinoza</h4>
-                            <p className="text-neutral-600">Lider</p>
-                        </div>
-                        <div className="flex flex-col items-center justify-center gap-1">
-                            <Image
-                                src="https://robohash.org/pepelian"
-                                width={100}
-                                height={100}
-                                alt="Picture of the author" />
-                            <h4 className="font-semibold">Dereck Arteaga </h4>
-                            <p className="text-neutral-600">Lider</p>
-                        </div>
-                        <div className="flex flex-col items-center justify-center gap-1">
-                            <Image
-                                src="https://robohash.org/pepelian"
-                                width={100}
-                                height={100}
-                                alt="Picture of the author" />
-                            <h4 className="font-semibold">Daniela Rodrigez</h4>
-                            <p className="text-neutral-600">C</p>
-                        </div>
-                        <div className="flex flex-col items-center justify-center gap-1">
-                            <Image
-                                src="https://robohash.org/pepelian"
-                                width={100}
-                                height={100}
-                                alt="Picture of the author" />
-                            <h4 className="font-semibold">Fernando Olivo</h4>
-                            <p className="text-neutral-600">Lider</p>
-                        </div>
-                        <div className="flex flex-col items-center justify-center gap-1">
-                            <Image
-                                src="https://robohash.org/pepelian"
-                                width={100}
-                                height={100}
-                                alt="Picture of the author" />
-                            <h4 className="font-semibold">Dilan Salcedo</h4>
-                            <p className="text-neutral-600">Lider</p>
-                        </div>
-                        {/* <div id="temm"></div> */}
+
+                        {
+                            imagesIntegrants.map((integran) => (
+                                <div key={integran.id} className="flex flex-col items-center justify-center gap-1">
+                                    <Image
+                                        src={integran.src}
+                                        width={100}
+                                        height={100}
+                                        unoptimized
+                                        alt={integran.name}
+                                        className="rounded-full object-cover"
+                                    />
+                                    <h4 className="font-semibold">{integran.name}</h4>
+                                </div>
+                            ))
+                        }
                     </div>
 
                 </section>
