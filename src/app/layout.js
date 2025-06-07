@@ -1,18 +1,22 @@
-"use client"; // Esto indica que este archivo es un componente de cliente
+"use client";
 
-import { useEffect, useState } from "react";
-import { Poppins } from "next/font/google";
-import SplashScreen from "../components/SplashScreen/SplashScreen"; // Asegúrate de tener el componente
+// import { Poppins } from "next/font/google";
+import { metadata } from "./metadata";
+import ClientRoot from "@/components/ClientRoot";
 import "./globals.css";
-import { UserProvider } from "@/context/UserContext"; // Si tienes contexto de usuario
-import { metadata } from "./metadata"; // Aquí importas el metadata
+import { AuthProvider } from "@/context/AuthContext";
+import { Provider } from "react-redux";
+import { store, persistor } from "@/redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import SplashScreen from "@/components/SplashScreen/SplashScreen";
 import { ToastContainer } from "react-toastify";
-
+import { useEffect, useState } from "react";
+/* 
 const poppins = Poppins({
 	subsets: ["latin"],
 	weight: ["300", "400", "600", "700"],
 	variable: "--font-poppins",
-});
+}); */
 
 export default function RootLayout({ children }) {
 	const [showSplash, setShowSplash] = useState(false);
@@ -20,6 +24,8 @@ export default function RootLayout({ children }) {
 	const [appReady, setAppReady] = useState(false);
 
 	useEffect(() => {
+		if (typeof window === "undefined") return;
+
 		const visited = localStorage.getItem("visited");
 
 		if (!visited) {
@@ -27,44 +33,45 @@ export default function RootLayout({ children }) {
 			setShowSplash(true);
 
 			const splashTimer = setTimeout(() => {
-				setFadeOut(true); // Inicia el fade-out
+				setFadeOut(true);
 				setTimeout(() => {
 					setShowSplash(false);
-					setAppReady(true); // Carga la app después del fade-out
-				}, 700); // Tiempo de fade-out
-			}, 2500); // Tiempo que el splash estará visible
+					setAppReady(true);
+				}, 700);
+			}, 2500);
 
-			return () => clearTimeout(splashTimer); // Limpiar el timer cuando el componente se desmonte
+			return () => clearTimeout(splashTimer);
 		} else {
-			setAppReady(true); // Si ya visitó la app, la carga inmediatamente
+			setAppReady(true);
 		}
 	}, []);
-
 	return (
 		<html lang='es'>
 			<head>
 				<meta name='description' content={metadata.description} />
 				<title>{metadata.title}</title>
-				{/* Aquí puedes agregar más meta tags u otros elementos necesarios */}
 			</head>
-			<body className={`${poppins.variable} antialiased`}>
-				<UserProvider>
-					{showSplash && <SplashScreen isVisible={!fadeOut} />}
-					{appReady && children}{" "}
-					{/* Carga el contenido de la app solo después de la animación */}
-					<ToastContainer
-						position='bottom-right'
-						autoClose={4000}
-						hideProgressBar={false}
-						newestOnTop={false}
-						closeOnClick
-						rtl={false}
-						pauseOnFocusLoss
-						draggable
-						pauseOnHover
-						theme='light'
-					/>
-				</UserProvider>
+			<body>
+				<Provider store={store}>
+					<PersistGate loading={null} persistor={persistor}>
+						<AuthProvider>
+							{showSplash && <SplashScreen isVisible={!fadeOut} />}
+							{appReady && children}{" "}
+							<ToastContainer
+								position='bottom-right'
+								autoClose={4000}
+								hideProgressBar={false}
+								newestOnTop={false}
+								closeOnClick
+								rtl={false}
+								pauseOnFocusLoss
+								draggable
+								pauseOnHover
+								theme='light'
+							/>
+						</AuthProvider>
+					</PersistGate>
+				</Provider>
 			</body>
 		</html>
 	);
