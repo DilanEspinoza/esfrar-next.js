@@ -1,24 +1,39 @@
-"use client";
+import { createContext, useContext, useState, useEffect } from "react";
 
-import React, { createContext, useState, useContext } from "react";
-
-// Crear el contexto
+// Creamos el contexto
 const UserContext = createContext();
 
-// Crear el proveedor del contexto
+// Proveedor del contexto
 export const UserProvider = ({ children }) => {
-    const [userId, setUserId] = useState(null);
+    const [user, setUser] = useState(null);
 
-    const updateUserId = (id) => {
-        setUserId(id);
+    // Al cargar la app, recupera el usuario del localStorage si existe
+    useEffect(() => {
+        const storedUser = localStorage.getItem("user");
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
+
+    // Método para actualizar el usuario
+    const updateUser = (newUser) => {
+        setUser(newUser);
+        localStorage.setItem("user", JSON.stringify(newUser));
+    };
+
+    // Método para cerrar sesión (opcional)
+    const logout = () => {
+        setUser(null);
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
     };
 
     return (
-        <UserContext.Provider value={{ userId, updateUserId }}>
+        <UserContext.Provider value={{ user, updateUser, logout }}>
             {children}
         </UserContext.Provider>
     );
 };
 
-// Custom hook para acceder al contexto
+// Hook para acceder fácilmente al contexto
 export const useUserContext = () => useContext(UserContext);
