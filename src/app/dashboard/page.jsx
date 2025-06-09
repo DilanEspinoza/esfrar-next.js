@@ -13,11 +13,14 @@ import {
 } from '@heroicons/react/20/solid';
 import Image from 'next/image';
 import { Fragment, useState, useEffect } from "react";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from "axios"
 import { Bounce, toast } from "react-toastify"
 import { ModalImage } from '@/components/ModalImage/ModalImage'
 import { useRouter } from 'next/navigation';
+import { logout } from "@/redux/slices/userSlice";
+import Link from 'next/link';
+import { useImagesUploadByUser } from '@/hooks/useImagesUploadByUser';
 
 
 
@@ -28,19 +31,33 @@ function classNames(...classes) {
 
 export default function ImagesUser() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [images, setImages] = useState([])
-    const [error, setError] = useState(null)
+    // const [images, setImages] = useState([])
+    // const [error, setError] = useState(null)
+    // const [showModalImage, setShowModalImage] = useState(false);
+    // const [imageToDelete, setImageToDelete] = useState(null);
+    // const [inputValuSearch, setInputValueSearch] = useState("");
+
     const [showModalImage, setShowModalImage] = useState(false);
     const [imageToDelete, setImageToDelete] = useState(null);
     const [inputValuSearch, setInputValueSearch] = useState("");
+    const {
+        images,
+        loading,
+        error,
+        handleDelete,
 
-
+    } = useImagesUploadByUser()
 
     const { token } = useAuth();
     const user = useSelector((state) => state.user.user);
 
     const router = useRouter();
+    const dispatch = useDispatch();
 
+    const handleClickBtnLogout = () => {
+        dispatch(logout()); // Despachamos la acción para hacer logout
+        router.push("/");
+    };
 
     const handleChangeInputForm = ({ target }) => setInputValueSearch(target.value);
     const handleSubmit = (e) => {
@@ -57,88 +74,98 @@ export default function ImagesUser() {
     const userNavigation = [
         { name: 'Tu Perfil', href: `/users/${user?.id}` },
         { name: 'Subir', href: '/upload-image' },
-        { name: 'Cerrar Sesión', href: '#' },
+        // { name: 'Cerrar Sesión',  },
     ];
 
-    useEffect(() => {
 
-        if (!token) {
-            toast.error("Token no encontrado. Por favor inicia sesión nuevamente.");
-            router.push("/login");
-            return;
-        }
-
-
-        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/images/users/${user?.id}`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        })
-            .then(res => {
+    /*     useEffect(() => {
+            if (typeof window === "undefined") return;
+    
+    
+            if (!token) {
+                toast.error("Token no encontrado. Por favor inicia sesión nuevamente.");
+                router.push("/login");
+                dispatch(logout())
+                return;
+            }
+    
+            try {
+    
+                axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/images/users/${user?.id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+    
                 setImages(res.data)
-            })
-            .catch(err => {
+    
+            } catch (error) {
+    
                 console.error(err)
                 setError("Error al cargar imágenes")
-            })
-    }, [])
+            }
+    
+    
+        }, [])
+    
+        // Abrir modal y asignar imagen a eliminar
+    
+    
+    
+        // Eliminar imagen confirmada
+        const handleDelete = async () => {
+            if (!user?.id || !imageToDelete) {
+                setShowModalImage(false)
+                return alert("Usuario o imagen no identificados")
+            }
+    
+            try {
+                await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/images/${imageToDelete}`, {
+                    data: {
+                        image_id: imageToDelete,
+                        user_id: user?.id,
+                    }, headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+    
+                setImages(prev => prev.filter(img => img.id !== imageToDelete))
+    
+                toast.success("Imagen eliminada con éxito", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: false,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
+            } catch (err) {
+                console.error(err)
+                toast.error("¡Hubo un error al eliminar la imagen! ", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: false,
+                    pauseOnHover: false,
+                    draggable: false,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                });
+            } finally {
+                setShowModalImage(false)
+                setImageToDelete(null)
+            }
+        }
+     */
 
-    // Abrir modal y asignar imagen a eliminar
     const confirmDelete = (imageId) => {
         setImageToDelete(imageId)
         setShowModalImage(true)
     }
-
-
-    // Eliminar imagen confirmada
-    const handleDelete = async () => {
-        if (!user?.id || !imageToDelete) {
-            setShowModalImage(false)
-            return alert("Usuario o imagen no identificados")
-        }
-
-        try {
-            await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/images/${imageToDelete}`, {
-                data: {
-                    image_id: imageToDelete,
-                    user_id: user?.id,
-                }, headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-
-            setImages(prev => prev.filter(img => img.id !== imageToDelete))
-
-            toast.success("Imagen eliminada con éxito", {
-                position: "bottom-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: false,
-                pauseOnHover: false,
-                draggable: false,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-            });
-        } catch (err) {
-            console.error(err)
-            toast.error("¡Hubo un error al eliminar la imagen! ", {
-                position: "bottom-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: false,
-                pauseOnHover: false,
-                draggable: false,
-                progress: undefined,
-                theme: "light",
-                transition: Bounce,
-            });
-        } finally {
-            setShowModalImage(false)
-            setImageToDelete(null)
-        }
-    }
-
 
     return (
 
@@ -241,7 +268,7 @@ export default function ImagesUser() {
                         <div className="mt-5 flex-grow flex flex-col">
                             <nav className="flex-1 px-2 pb-4 space-y-1">
                                 {navigation.map((item) => (
-                                    <a
+                                    <Link
                                         key={item.name}
                                         href={item.href}
                                         className={classNames(
@@ -257,7 +284,7 @@ export default function ImagesUser() {
                                             aria-hidden="true"
                                         />
                                         {item.name}
-                                    </a>
+                                    </Link>
                                 ))}
                             </nav>
                         </div>
@@ -410,7 +437,10 @@ export default function ImagesUser() {
                         Cancelar
                     </button>
                     <button
-                        onClick={handleDelete}
+                        onClick={() => {
+                            handleDelete(imageToDelete)
+                            setShowModalImage(false)
+                        }}
                         className="px-4 py-2 rounded bg-red-600 text-white hover:bg-red-700"
                     >
                         Sí, eliminar
