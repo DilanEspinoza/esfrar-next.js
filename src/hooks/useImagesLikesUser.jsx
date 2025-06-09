@@ -22,7 +22,6 @@ export const useImagesLikesUser = () => {
                 const res = await axios.get(`${API_URL}/api/images/user/${user?.id}/likes`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                console.log(res.data)
                 setImages(res.data);
             } catch (err) {
                 setError(`${err.response.data.error}`);
