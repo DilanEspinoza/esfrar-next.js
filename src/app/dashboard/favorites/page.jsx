@@ -23,6 +23,7 @@ import { Bounce, toast } from "react-toastify"
 import { ModalImage } from '@/components/ModalImage/ModalImage'
 import { useRouter } from 'next/navigation';
 import { useImagesFavoritesUser } from '@/hooks/useImagesFavoritesUser';
+import Link from 'next/link';
 
 
 
@@ -166,7 +167,7 @@ export default function ImagesFavoritesUser() {
                                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                                     <nav className="px-2 space-y-1">
                                         {navigation.map((item) => (
-                                            <a
+                                            <Link
                                                 key={item.name}
                                                 href={item.href}
                                                 className={classNames(
@@ -184,7 +185,7 @@ export default function ImagesFavoritesUser() {
                                                     aria-hidden="true"
                                                 />
                                                 {item.name}
-                                            </a>
+                                            </Link>
                                         ))}
                                     </nav>
                                 </div>
