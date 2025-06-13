@@ -4,7 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Header } from "@/components/Header/Header";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+import { Bounce, toast } from "react-toastify";
 
 
 export default function Register() {
@@ -80,7 +80,7 @@ export default function Register() {
 
         } catch (err) {
 
-            toast.error(err.response.data.message, {
+            toast.error(err?.response?.data?.message || "Hubo un error al intentar hacer login", {
                 position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
