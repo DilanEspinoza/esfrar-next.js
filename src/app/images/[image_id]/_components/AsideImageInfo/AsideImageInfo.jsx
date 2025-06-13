@@ -7,7 +7,7 @@ import Link from "next/link";
 
 
 
-export const AsideImageInfo = ({ user_id, user_name, last_name, image_id, image_url, image_title }) => {
+export const AsideImageInfo = ({ user_id, user_name, image_id, image_url, image_title }) => {
 
     return (
         <aside className="sticky top-6 rounded-lg py-5 shadow-2xl w-[300px] ">
@@ -45,7 +45,7 @@ export const AsideImageInfo = ({ user_id, user_name, last_name, image_id, image_
                     <FavoriteButton image_id={image_id} />
                 </div>
                 <hr className="border border-neutral-100" />
-                <ImageDownloader imageUrl={image_url} file_name={image_title} />
+                <ImageDownloader image_url={image_url} file_name={image_title} />
             </div>
         </aside >
     );
